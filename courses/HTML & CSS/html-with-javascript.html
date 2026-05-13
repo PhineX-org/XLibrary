@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML with JavaScript | PhineX Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --js-yellow: #f7df1e;
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --text: #c9d1d9;
+            --neon: #39ff14;
+            --border: #30363d;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #1f2937, #0d1117);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        header h1 { color: var(--js-yellow); font-size: 2.5rem; margin: 0; }
+
+        .lesson-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-right: 5px solid var(--js-yellow);
+            border: 1px solid var(--border);
+        }
+
+        h2 { color: var(--js-yellow); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; border: 1px solid var(--border); text-align: right; }
+        th { background: #000; color: var(--js-yellow); }
+        code { color: var(--neon); font-family: monospace; direction: ltr; display: inline-block; }
+
+        /* Interactive Playground */
+        .playground {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .editor-box { display: flex; flex-direction: column; }
+        .label { background: #21262d; padding: 5px 15px; border-radius: 5px 5px 0 0; font-size: 0.9rem; color: var(--js-yellow); }
+        textarea {
+            width: 100%;
+            height: 250px;
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            font-family: 'Consolas', monospace;
+            border: 1px solid var(--border);
+            outline: none;
+            direction: ltr;
+        }
+        .output-box {
+            background: #000;
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 0 0 10px 10px;
+            min-height: 250px;
+            color: #00ff00;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .btn-run {
+            background: var(--js-yellow);
+            color: #000;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .quiz-section { background: #161b22; padding: 30px; border-radius: 20px; border: 2px solid var(--js-yellow); }
+        .q-item { margin-bottom: 20px; padding: 15px; border-radius: 10px; background: #0d1117; }
+        .correct { border: 2px solid var(--neon); }
+        .wrong { border: 2px solid #ff4444; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>JavaScript: العقل المدبر 🧠</h1>
+        <p>بعد ما بنينا الهيكل ولوناه، جه الوقت نخليه "يفكر" ويتفاعل مع المستخدِم.</p>
+    </header>
+
+    <div class="lesson-card">
+        <h2>1. إزاي نربط الـ JS بالـ HTML؟</h2>
+        <table>
+            <tr><th>الطريقة</th><th>الكود</th><th>الاستخدام</th></tr>
+            <tr><td><code>Internal</code></td><td><code>&lt;script&gt; // code &lt;/script&gt;</code></td><td>جوه صفحة الـ HTML (عادةً قبل قفلة الـ body).</td></tr>
+            <tr><td><code>External</code></td><td><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></td><td>ملف منفصل، أحسن للتنظيم والمشاريع الكبيرة.</td></tr>
+            <tr><td><code>Inline</code></td><td><code>onclick="alert('Hi')"</code></td><td>جوه التاج نفسه (مش مفضل استخدامه كتير).</td></tr>
+        </table>
+    </div>
+
+    <div class="lesson-card">
+        <h2>2. لغة الحوار مع العناصر (The DOM)</h2>
+        <p>الـ DOM هو الطريقة اللي الـ JS بيشوف بيها الـ HTML عشان يقدر يغير فيها:</p>
+        <table>
+            <tr><td><code>document.getElementById()</code></td><td>بتمسك عنصر عن طريق الـ ID بتاعه.</td></tr>
+            <tr><td><code>element.innerHTML</code></td><td>بتغير الكلام اللي جوه التاج.</td></tr>
+            <tr><td><code>element.style.color</code></td><td>بتغير لون العنصر بالكود.</td></tr>
+            <tr><td><code>element.classList.add()</code></td><td>بتضيف CSS Class للعنصر.</td></tr>
+        </table>
+    </div>
+
+    <div class="lesson-card">
+        <h2>3. الأحداث (Events)</h2>
+        <p>الـ JS مستني المستخدم يعمل حاجة عشان يبدأ يشتغل:</p>
+        <ul>
+            <li><code>onclick</code>: لما المستخدم يدوس على حاجة.</li>
+            <li><code>onmouseover</code>: لما الماوس يقف فوق عنصر.</li>
+            <li><code>onsubmit</code>: لما المستخدم يبعت بيانات (Form).</li>
+            <li><code>onkeydown</code>: لما المستخدم يدوس على زرار في الكيبورد.</li>
+        </ul>
+    </div>
+    <!-- كارت 1: المخازن (Variables) -->
+<div class="lesson-card">
+    <h2>1. المخازن (let vs const)</h2>
+    <p>زمان كان فيه <code>var</code>، دلوقتي السنيورز بيستخدموا:</p>
+    <table class="props-table">
+        <tr><th>النوع</th><th>الاستخدام</th></tr>
+        <tr><td><code>const</code></td><td>للحاجة اللي مش هتغير قيمتها أبدًا (زي اسم الموقع).</td></tr>
+        <tr><td><code>let</code></td><td>للحاجة اللي قيمتها ممكن تتغير (زي سكور اللعبة).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 2: دمج النصوص (Template Literals) -->
+<div class="lesson-card">
+    <h2>2. دمج النصوص الذكي</h2>
+    <p>بدل ما تستخدم علامة الـ (+) وتتلخبط في المسافات، استخدم الـ Backtick (`):</p>
+    <table class="props-table">
+        <tr><td><code>`Hello ${name}`</code></td><td>بتسمح لك تحط متغيرات جوه النص بسهولة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 3: الشروط المختصرة (Ternary Operator) -->
+<div class="lesson-card">
+    <h2>3. إف الشرطية في سطر واحد</h2>
+    <p>بدل ما تكتب 4 سطور <code>if/else</code>، اختصرها:</p>
+    <table class="props-table">
+        <tr><td><code>(age > 18) ? "Welcome" : "Stop"</code></td><td>لو الشرط صح نفذ اللي بعد (؟) لو غلط نفذ اللي بعد (:).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 4: الدوال السهمية (Arrow Functions) -->
+<div class="lesson-card">
+    <h2>4. الدوال السريعة (Arrow Functions)</h2>
+    <p>أحدث وأسرع طريقة لكتابة الـ functions:</p>
+    <table class="props-table">
+        <tr><td><code>const sayHi = () => console.log("Hi");</code></td><td>شكل أنظف وكود أقل.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 5: المصفوفات (Arrays) -->
+<div class="lesson-card">
+    <h2>5. المصفوفة (Array)</h2>
+    <p>صندوق واحد بيشيل حاجات كتير بالترتيب:</p>
+    <table class="props-table">
+        <tr><td><code>fruits[0]</code></td><td>بنجيب أول عنصر (العد بيبدأ من صفر).</td></tr>
+        <tr><td><code>fruits.length</code></td><td>بيعرفك عندك كام حاجة جوه الصندوق.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 6: إضافة وحذف (Push & Pop) -->
+<div class="lesson-card">
+    <h2>6. التعامل مع المصفوفة</h2>
+    <p>إزاي تزود أو تنقص حاجات من صندوقك:</p>
+    <table class="props-table">
+        <tr><td><code>push()</code></td><td>بتضيف عنصر في آخر المصفوفة.</td></tr>
+        <tr><td><code>pop()</code></td><td>بتمسح آخر عنصر.</td></tr>
+        <tr><td><code>unshift()</code></td><td>بتضيف عنصر في الأول خالص.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 7: اللف الذكي (forEach) -->
+<div class="lesson-card">
+    <h2>7. اللف على العناصر (forEach)</h2>
+    <p>بدل الـ <code>for loop</code> المعقدة، دي بتلف على كل عنصر وتعمل فيه اللي إنت عايزه:</p>
+    <table class="props-table">
+        <tr><td><code>users.forEach(u => console.log(u))</code></td><td>بتطبع كل مستخدم لوحده.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 8: الفلترة (Filter) -->
+<div class="lesson-card">
+    <h2>8. الفلترة (Filter)</h2>
+    <p>لو عايز تطلع عناصر معينة بس من المصفوفة (مثلاً المنتجات اللي سعرها أقل من 100):</p>
+    <table class="props-table">
+        <tr><td><code>items.filter(i => i.price < 100)</code></td><td>بترجع مصفوفة جديدة فيها اللي نجح في الاختبار بس.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 9: التحويل (Map) -->
+<div class="lesson-card">
+    <h2>9. التحويل السحري (Map)</h2>
+    <p>بتاخد مصفوفة وتغير كل عنصر فيها وترجع مصفوفة جديدة بنفس العدد:</p>
+    <table class="props-table">
+        <tr><td><code>numbers.map(n => n * 2)</code></td><td>بتضرب كل الأرقام في 2.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 10: الكائنات (Objects) -->
+<div class="lesson-card">
+    <h2>10. الكائن (Object)</h2>
+    <p>بيوصف حاجة بكل تفاصيلها (Key & Value):</p>
+    <table class="props-table">
+        <tr><td><code>user.name</code></td><td>بتجيب اسم المستخدم من جوه الكائن.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 11: التفكيك (Destructuring) -->
+<div class="lesson-card">
+    <h2>11. تفكيك الكائنات</h2>
+    <p>بدل ما تكتب <code>user.name</code> و <code>user.age</code>، استخرجهم مرة واحدة:</p>
+    <table class="props-table">
+        <tr><td><code>const {name, age} = user;</code></td><td>بقى عندك متغيرين جاهزين للاستخدام فوراً.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 12: الوقت (SetTimeout) -->
+<div class="lesson-card">
+    <h2>12. مؤقت التأخير (setTimeout)</h2>
+    <p>نفذ الكود ده بعد وقت معين (بالملي ثانية):</p>
+    <table class="props-table">
+        <tr><td><code>setTimeout(fn, 3000)</code></td><td>هينفذ الدالة بعد 3 ثواني بالظبط.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 13: التكرار الزمني (SetInterval) -->
+<div class="lesson-card">
+    <h2>13. التكرار الزمني (setInterval)</h2>
+    <p>كرر الكود ده كل فترة زمنية (مثلاً لساعة رقمية):</p>
+    <table class="props-table">
+        <tr><td><code>setInterval(fn, 1000)</code></td><td>هينفذ الكود كل ثانية للأبد.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 14: تحويل النص لرقم (parseInt) -->
+<div class="lesson-card">
+    <h2>14. تحويل النصوص لأرقام</h2>
+    <p>لو عندك "10" وعايز تجمعها كرقم مش كنص:</p>
+    <table class="props-table">
+        <tr><td><code>Number("10")</code></td><td>بتحول النص لرقم صريح.</td></tr>
+        <tr><td><code>parseInt("10.5")</code></td><td>بتحولها لرقم صحيح (10).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 15: العشوائية (Math.random) -->
+<div class="lesson-card">
+    <h2>15. الأرقام العشوائية</h2>
+    <p>أساس عمل الألعاب والقرعة:</p>
+    <table class="props-table">
+        <tr><td><code>Math.random()</code></td><td>بتطلع رقم عشوائي بين 0 و 1.</td></tr>
+        <tr><td><code>Math.floor()</code></td><td>بتقرب الرقم لتحت (عشان تشيل الكسور).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 16: الوعود (Promises) -->
+<div class="lesson-card">
+    <h2>16. الوعود (Promises)</h2>
+    <p>كود بيقولك: "استنى لما أجيب الداتا وهرد عليك يا نجحت يا فشلت":</p>
+    <table class="props-table">
+        <tr><td><code>.then()</code></td><td>لو الوعد اتنفذ بنجاح.</td></tr>
+        <tr><td><code>.catch()</code></td><td>لو حصلت مشكلة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 17: الانتظار الحديث (Async / Await) -->
+<div class="lesson-card">
+    <h2>17. الانتظار الحديث (Async/Await)</h2>
+    <p>أشيك طريقة للتعامل مع الـ Promises، بتخلي الكود يبدو كأنه سطر ورا سطر:</p>
+    <table class="props-table">
+        <tr><td><code>await getData()</code></td><td>استنى لما الداتا تيجي قبل ما تنزل للسطر اللي بعده.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 18: جلب البيانات (Fetch API) -->
+<div class="lesson-card">
+    <h2>18. جلب البيانات الخارجية (Fetch)</h2>
+    <p>إزاي تكلم سيرفر وتجيب منه معلومات (زي حالة الطقس):</p>
+    <table class="props-table">
+        <tr><td><code>fetch(url)</code></td><td>بتبعت طلب للسيرفر وتستلم الـ Response.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 19: تخزين البيانات (LocalStorage) -->
+<div class="lesson-card">
+    <h2>19. ذاكرة المتصفح (LocalStorage)</h2>
+    <p>احفظ بيانات المستخدم حتى لو قفل الصفحة وفتحها تاني هتفضل موجودة:</p>
+    <table class="props-table">
+        <tr><td><code>localStorage.setItem('key', 'value')</code></td><td>حفظ البيانات.</td></tr>
+        <tr><td><code>localStorage.getItem('key')</code></td><td>استرجاع البيانات.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 20: تحويل JSON -->
+<div class="lesson-card">
+    <h2>20. لغة السيرفرات (JSON)</h2>
+    <p>إزاي تحول الكائن (Object) لنص عشان ينفع يتبعت للسيرفر:</p>
+    <table class="props-table">
+        <tr><td><code>JSON.stringify()</code></td><td>من كائن لنص.</td></tr>
+        <tr><td><code>JSON.parse()</code></td><td>من نص لكائن (عشان تعرف تستخدمه).</td></tr>
+    </table>
+</div>
+
+    <div class="lesson-card">
+        <h2>جرب كود الـ JavaScript بنفسك 🧪</h2>
+        <div class="playground">
+            <div class="editor-box">
+                <div class="label">اكتب كود JS هنا:</div>
+                <textarea id="js-code">
+// جرب تغير الكلام ده
+let name = "يوسف";
+function sayHello() {
+   console.log("أهلاً يا " + name + "! نورت PhineX");
+   alert("تم تشغيل الكود بنجاح!");
+}
+
+sayHello();</textarea>
+                <button class="btn-run" onclick="runJS()">شغل الكود (Run)</button>
+            </div>
+            <div class="editor-box">
+                <div class="label">النتيجة (Console):</div>
+                <div id="console-out" class="output-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quiz-section">
+        <h2>اختبار سرعة الـ JavaScript ⚡</h2>
+        
+        <div class="q-item" id="qj1">
+            <p>1. أي أمر بنستخدمه عشان نعرض رسالة تنبيه (Pop-up) للمستخدم؟</p>
+            <label><input type="radio" name="js1" value="print"> print()</label><br>
+            <label><input type="radio" name="js1" value="alert"> alert()</label><br>
+            <label><input type="radio" name="js1" value="msg"> message()</label>
+        </div>
+
+        <div class="q-item" id="qj2">
+            <p>2. إزاي بنمسك عنصر في الـ HTML واخد <code>id="title"</code>؟</p>
+            <label><input type="radio" name="js2" value="a"> getElementById("title")</label><br>
+            <label><input type="radio" name="js2" value="b"> getElementByClass("title")</label><br>
+            <label><input type="radio" name="js2" value="c"> find("title")</label>
+        </div>
+        <div class="q-item" id="qj3">
+        <p>3. إيه النتيجة المتوقعة للكود ده: <code>console.log(typeof [1, 2]);</code>؟</p>
+        <label><input type="radio" name="js3" value="a"> "array"</label><br>
+        <label><input type="radio" name="js3" value="b"> "object"</label><br>
+        <label><input type="radio" name="js3" value="c"> "list"</label>
+    </div>
+
+    <div class="q-item" id="qj4">
+        <p>4. أي علامة بنستخدمها عشان نكتب "Template Literals"؟</p>
+        <label><input type="radio" name="js4" value="a"> Single quotes ' '</label><br>
+        <label><input type="radio" name="js4" value="b"> Double quotes " "</label><br>
+        <label><input type="radio" name="js4" value="c"> Backticks ` `</label>
+    </div>
+
+    <div class="q-item" id="qj5">
+        <p>5. إيه اللي بيحصل لما نستخدم <code>const</code> مع متغير؟</p>
+        <label><input type="radio" name="js5" value="a"> قيمته مش ممكن تتغير.</label><br>
+        <label><input type="radio" name="js5" value="b"> بيبقى متاح في الصفحة كلها.</label><br>
+        <label><input type="radio" name="js5" value="c"> بيتمسح بعد ثانية.</label>
+    </div>
+
+        <button class="btn-run" onclick="checkJSQuiz()">تأكد من الإجابة</button>
+    </div>
+</div>
+
+<script>
+    // نظام تشغيل الكود وتجربته
+    function runJS() {
+        const consoleOut = document.getElementById('console-out');
+        const code = document.getElementById('js-code').value;
+        consoleOut.innerHTML = ""; // مسح القديم
+
+        // إعادة توجيه الـ console.log للشاشة
+        const oldLog = console.log;
+        console.log = function(message) {
+            consoleOut.innerHTML += "> " + message + "\n";
+        };
+
+        try {
+            eval(code);
+        } catch (err) {
+            consoleOut.innerHTML += "خطأ في الكود: " + err.message;
+        }
+        
+        console.log = oldLog; // إرجاع الكونسول لأصله
+    }
+
+    // نظام الكويز
+    function checkJSQuiz() {
+        const answers = { js1: "alert", js2: "a", js3: "b", js4: "c", js5: "a" };
+        let score = 0;
+
+        for (let i = 1; i <= 5; i++) {
+            const selected = document.querySelector(`input[name="js${i}"]:checked`);
+            const div = document.getElementById(`qj${i}`);
+            if (selected && selected.value === answers[`js${i}`]) {
+                div.className = "q-item correct";
+                score++;
+            } else {
+                div.className = "q-item wrong";
+            }
+        }
+
+        if (score === 5) {
+            alert("عاش! بقيت مبرمج HTML حقيقي 🎉");
+            saveProgress();
+            document.querySelector(`button[onclick="checkJSQuiz()"]`).disabled = true; // منع إعادة الاختبار
+            document.getElementById('success-box').innerText = 'أسطورة الـ JavaScript! قفلت الامتحان 🏆\nدلوقتي موقعك بقى له شخصية وتفاعلية. كمل المسيرة!';
+        }
+    }
+</script>
+
+</body>
+</html>

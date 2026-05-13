@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دورة احتراف الـ SEO التقني | PhineX Academy</title>
+    <style>
+        :root {
+            --seo-green: #00e676;
+            --bg-dark: #0a0c10;
+            --card-bg: #1c2128;
+            --code-bg: #000000;
+            --text-gray: #adbac7;
+            --accent-blue: #539bf5;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-gray);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .header-section {
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, #161b22, #0a0c10);
+            border-radius: 25px;
+            border: 1px solid var(--seo-green);
+            margin-bottom: 40px;
+        }
+
+        .lesson-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 50px;
+            border-left: 5px solid var(--accent-blue);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        h2 { color: var(--seo-green); font-size: 2rem; border-bottom: 1px solid #30363d; padding-bottom: 15px; }
+        h3 { color: var(--accent-blue); margin-top: 25px; }
+
+        .mission-box {
+            background: rgba(83, 155, 245, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #fff;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            padding: 25px;
+            border-radius: 12px;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #30363d;
+            margin: 20px 0;
+            color: #f8f8f2;
+        }
+
+        /* تلوين الكود */
+        .tag { color: #ff79c6; }
+        .attr { color: #50fa7b; }
+        .val { color: #f1fa8c; }
+        .comment { color: #6272a4; font-style: italic; }
+
+        .result-preview {
+            background: #2d333b;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px dashed var(--seo-green);
+            margin-top: 15px;
+        }
+
+        .tab { margin-left: 30px; }
+        .double-tab { margin-left: 60px; }
+
+        .quiz-section {
+            background: #22272e;
+            padding: 40px;
+            border-radius: 25px;
+            border: 2px solid var(--accent-blue);
+        }
+
+        .check-btn {
+            background: var(--seo-green);
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .check-btn:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-section">
+        <h1>كورس الـ SEO لبرمجيات HTML 🚀</h1>
+        <p>تعلم كيف تجعل جوجل يحب موقعك ويتصدر نتائج البحث من خلال الكود فقط.</p>
+    </div>
+
+    <!-- الكارت 1: الـ Meta Tags -->
+    <div class="lesson-card">
+        <h2>1. أهمية الـ Meta Tags (هوية الصفحة)</h2>
+        <div class="mission-box">المهمة: إخبار محركات البحث بمحتوى الصفحة وماذا تعرض في نتائج البحث.</div>
+        
+        <h3>الشرح التفصيلي:</h3>
+        <p>
+            محركات البحث لا "ترى" الموقع مثلك، بل تقرأ كود الـ Head. <br>
+            - وسم الـ <b>Description</b> هو النص الذي يظهر تحت رابط موقعك في جوجل. <br>
+            - وسم <b>Canonical</b> يمنع تكرار المحتوى ويخبر جوجل بالرابط الأصلي.
+        </p>
+
+        <h3>الكود المنسق:</h3>
+        <div class="code-container">
+            <span class="tag">&lt;head&gt;</span> <br>
+            <span class="tab comment">&lt;!-- العنوان الذي يظهر في التاب ونتائج البحث (أهم وسم SEO) --&gt;</span> <br>
+            <span class="tab">&lt;title&gt;</span>كورس HTML متقدم | PhineX<span class="tag">&lt;/title&gt;</span> <br>
+            <br>
+            <span class="tab comment">&lt;!-- وصف الصفحة (60-160 حرف) --&gt;</span> <br>
+            <span class="tab">&lt;meta</span> <span class="attr">name=</span><span class="val">"description"</span> <span class="attr">content=</span><span class="val">"تعلم تطوير الويب من الصفر مع PhineX."</span><span class="tag">&gt;</span> <br>
+            <br>
+            <span class="tab comment">&lt;!-- تحديد الرابط الأساسي لمنع مشاكل المحتوى المكرر --&gt;</span> <br>
+            <span class="tab">&lt;link</span> <span class="attr">rel=</span><span class="val">"canonical"</span> <span class="attr">href=</span><span class="val">"https://phinex.com/course"</span><span class="tag">&gt;</span> <br>
+            <span class="tag">&lt;/head&gt;</span>
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-preview">
+            عندما يبحث شخص عن "كورس HTML"، سيعرض جوجل عنوانك بلون أزرق وتحته الوصف الذي كتبته في <code>content</code>، مما يزيد من نسبة الضغط على موقعك.
+        </div>
+    </div>
+
+    <!-- الكارت 2: الهيكلية الدلالية (Semantic HTML) -->
+    <div class="lesson-card">
+        <h2>2. هيكلية الـ Semantic (التنظيم الذكي)</h2>
+        <div class="mission-box">المهمة: مساعدة "عناكب البحث" على فهم أي جزء هو المقال، وأي جزء هو القائمة الجانبية.</div>
+
+        <h3>الشرح التفصيلي:</h3>
+        <p>
+            استخدام <code>&lt;div&gt;</code> لكل شيء هو خطأ فادح. <br>
+            جوجل يحتاج أن يعرف أين محتواك الرئيسي. <br>
+            - استخدم <b>Main</b> للمحتوى الأساسي. <br>
+            - استخدم <b>Article</b> للمواضيع المستقلة.
+        </p>
+
+        <h3>الكود المنسق:</h3>
+        <div class="code-container">
+            <span class="tag">&lt;main&gt;</span> <br>
+            <span class="tab">&lt;article&gt;</span> <br>
+            <span class="double-tab">&lt;h1&gt;</span>كيف تصبح مبرمجاً ناجحاً<span class="tag">&lt;/h1&gt;</span> <br>
+            <span class="double-tab">&lt;p&gt;</span>هذا النص هو محتوى المقال الأساسي...<span class="tag">&lt;/p&gt;</span> <br>
+            <span class="tab">&lt;/article&gt;</span> <br>
+            <span class="tag">&lt;/main&gt;</span>
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-preview">
+            جوجل سيعطي أهمية قصوى للنص الموجود داخل <code>&lt;h1&gt;</code> و <code>&lt;article&gt;</code> ويعتبره الكلمة المفتاحية التي يجب أن يتصدر بها موقعك.
+        </div>
+    </div>
+
+    <!-- الكارت 3: تحسين الصور (Alt Text) -->
+    <div class="lesson-card">
+        <h2>3. الـ Alt Text (تصدّر نتائج الصور)</h2>
+        <div class="mission-box">المهمة: وصف الصور لمحركات البحث وللمكفوفين.</div>
+
+        <h3>الشرح التفصيلي:</h3>
+        <p>
+            جوجل لا يستطيع قراءة محتوى الصورة، هو يقرأ وصفها. <br>
+            إذا كان لديك صورة لـ "لوجو فينيكس"، يجب أن تخبر المتصفح بذلك عبر خاصية <b>alt</b>.
+        </p>
+
+        <h3>الكود المنسق:</h3>
+        <div class="code-container">
+            <span class="tag">&lt;img</span> <br>
+            <span class="tab attr">src=</span><span class="val">"logo.png"</span> <br>
+            <span class="tab attr">alt=</span><span class="val">"شعار شركة PhineX لتطوير البرمجيات"</span> <br>
+            <span class="tab attr">loading=</span><span class="val">"lazy"</span> <br>
+            <span class="tag">&gt;</span>
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-preview">
+            1. ستظهر صورتك في "بحث صور جوجل" (Google Images). <br>
+            2. خاصية <code>loading="lazy"</code> تجعل الصورة لا تحمل إلا عند وصول المستخدم إليها، مما يسرع الموقع (عامل SEO مهم جداً).
+        </div>
+    </div>
+    <!-- الكارت 4: الروابط والـ NoFollow -->
+    <div class="lesson-card">
+        <h2>4. هندسة الروابط (Link Authority)</h2>
+        <div class="mission-box">المهمة: التحكم في كيفية انتقال "قوة الموقع" (Link Juice) عبر الروابط الخارجية.</div>
+        
+        <h3>الشرح التفصيلي:</h3>
+        <p>
+            عندما تضع رابطاً لموقع آخر، فأنت تعطي "ثقة" من موقعك لهذا الموقع. <br>
+            - إذا كان الموقع غير موثوق أو رابط إعلاني، استخدم <b>rel="nofollow"</b>. <br>
+            - الروابط التي تفتح في صفحة جديدة تحتاج <b>rel="noopener"</b> لأسباب أمنية ولتحسين الأداء.
+        </p>
+
+        <h3>الكود المنسق:</h3>
+        <div class="code-container">
+            <span class="comment">&lt;!-- رابط خارجي لا نريد إعطاءه قوة SEO (رابط سبونسر مثلاً) --&gt;</span> <br>
+            <span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"https://external-site.com"</span> <br>
+            <span class="tab attr">rel=</span><span class="val">"nofollow noopener"</span> <br>
+            <span class="tab attr">target=</span><span class="val">"_blank"</span><span class="tag">&gt;</span> <br>
+            <span class="tab">زيارة الموقع الخارجي</span> <br>
+            <span class="tag">&lt;/a&gt;</span>
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-preview">
+            جوجل سيفهم أنك لا تزكي هذا الموقع برمجياً، مما يحمي موقعك من الارتباط بمواقع ذات سمعة سيئة (Spam)، كما يحافظ على أداء الصفحة.
+        </div>
+    </div>
+
+    <!-- الكارت 5: الـ Open Graph (السوشيال ميديا) -->
+    <div class="lesson-card">
+        <h2>5. بروتوكول الـ Open Graph (OG Tags)</h2>
+        <div class="mission-box">المهمة: التحكم في شكل ظهور موقعك عند مشاركة الرابط على فيسبوك أو واتساب.</div>
+
+        <h3>الشرح التفصيلي:</h3>
+        <p>
+            هل لاحظت أن بعض الروابط تظهر بصورة كبيرة وعنوان جذاب عند إرسالها؟ <br>
+            هذا يتم عبر وسوم <b>og:tags</b>. جوجل يعتبر التفاعل الاجتماعي إشارة غير مباشرة لجودة الموقع.
+        </p>
+
+        <h3>الكود المنسق:</h3>
+        <div class="code-container">
+            <span class="tag">&lt;meta</span> <span class="attr">property=</span><span class="val">"og:title"</span> <span class="attr">content=</span><span class="val">"تعلم البرمجة مع PhineX"</span><span class="tag">&gt;</span> <br>
+            <span class="tag">&lt;meta</span> <span class="attr">property=</span><span class="val">"og:image"</span> <span class="attr">content=</span><span class="val">"preview-thumb.jpg"</span><span class="tag">&gt;</span> <br>
+            <span class="tag">&lt;meta</span> <span class="attr">property=</span><span class="val">"og:type"</span> <span class="attr">content=</span><span class="val">"website"</span><span class="tag">&gt;</span>
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-preview">
+            عند مشاركة الرابط، سيظهر بوستر الموقع والعنوان بشكل احترافي، مما يزيد من نسبة الدخول (CTR) وهو عامل أساسي في رفع ترتيبك.
+        </div>
+    </div>
+
+    <!-- الكارت 6: ملف الـ Robots.txt والاستبعاد -->
+    <div class="lesson-card">
+        <h2>6. توجيه العناكب (Robots Meta Tag)</h2>
+        <div class="mission-box">المهمة: منع جوجل من أرشفة صفحات معينة (مثل لوحة التحكم أو ملفات الإدارة).</div>
+
+        <h3>الشرح التفصيلي:</h3>
+        <p>
+            ليس كل شيء في موقعك يجب أن يظهر في البحث. <br>
+            استخدم <b>noindex</b> لإخبار المحركات: "اقرئي هذه الصفحة ولكن لا تظهريها في النتائج".
+        </p>
+
+        <h3>الكود المنسق:</h3>
+        <div class="code-container">
+            <span class="comment">&lt;!-- منع الأرشفة تماماً لهذه الصفحة المحددة --&gt;</span> <br>
+            <span class="tag">&lt;meta</span> <span class="attr">name=</span><span class="val">"robots"</span> <span class="attr">content=</span><span class="val">"noindex, nofollow"</span><span class="tag">&gt;</span>
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-preview">
+            هذه الصفحة ستختفي تماماً من نتائج بحث جوجل، مما يحافظ على خصوصية الأجزاء البرمجية الحساسة في موقعك.
+        </div>
+    </div>
+</div>
+
+    <!-- قسم الاختبار -->
+    <div class="quiz-section">
+        <h2>اختبر مهاراتك في الـ SEO 🧠</h2>
+        <form id="seoQuiz">
+            <div class="question">
+                <p><b>1. ما هو عدد وسوم H1 المسموح بها في الصفحة الواحدة لضمان SEO جيد؟</b></p>
+                <input type="radio" name="q1" value="one"> واحد فقط <br>
+                <input type="radio" name="q1" value="many"> أي عدد <br>
+            </div>
+
+            <div class="question">
+                <p><b>2. ما فائدة خاصية alt في الصور؟</b></p>
+                <input type="radio" name="q2" value="style"> تلوين الصورة <br>
+                <input type="radio" name="q2" value="seo"> وصف الصورة لمحركات البحث <br>
+            </div>
+             <div class="question" style="margin-bottom: 20px;">
+                <p><b>3. ما هي القيمة التي نضعها في rel لمنع انتقال الـ Link Juice لموقع خارجي؟</b></p>
+                <input type="radio" name="q3" value="follow"> rel="follow" <br>
+                <input type="radio" name="q3" value="nofollow"> rel="nofollow" <br>
+                <input type="radio" name="q3" value="external"> rel="external" <br>
+            </div>
+
+            <div class="question" style="margin-bottom: 20px;">
+                <p><b>4. أي وسم Meta مسؤول عن شكل ظهور الصورة عند مشاركة الرابط على واتساب؟</b></p>
+                <input type="radio" name="q4" value="desc"> description <br>
+                <input type="radio" name="q4" value="ogimage"> og:image <br>
+                <input type="radio" name="q4" value="twitter"> twitter:card <br>
+            </div>
+
+            <div class="question" style="margin-bottom: 20px;">
+                <p><b>5. ماذا يعني الأمر "noindex" في وسم الـ robots؟</b></p>
+                <input type="radio" name="q5" value="a"> تسريع الصفحة <br>
+                <input type="radio" name="q5" value="b"> منع ظهور الصفحة في نتائج البحث <br>
+                <input type="radio" name="q5" value="c"> تغيير لغة الصفحة <br>
+            </div>
+
+            <br>
+            <button type="button" class="check-btn" onclick="checkSeoQuiz()">تحقق من إجاباتي</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function checkSeoQuiz() {
+        const q1 = document.querySelector('input[name="q1"]:checked');
+        const q2 = document.querySelector('input[name="q2"]:checked');
+        const q3 = document.querySelector('input[name="q3"]:checked');
+        const q4 = document.querySelector('input[name="q4"]:checked');
+        const q5 = document.querySelector('input[name="q5"]:checked');
+
+        if (!q1 || !q2 || !q3 || !q4 || !q5) {
+            alert("برجاء حل كل الأسئلة أولاً!");
+            return;
+        }
+
+        let score = 0;
+        if (q1.value === "one") score++;
+        if (q2.value === "seo") score++;
+        if (q3.value === "nofollow") score++;
+        if (q4.value === "ogimage") score++;
+        if (q5.value === "b") score++;
+
+        if (score === 5) {
+            alert("ممتاز! أنت الآن تدرك أساسيات الـ Technical SEO.");
+        } else {
+            alert(`درجتك ${score} من 5. حاول مرة أخرى!`);
+        }
+    }
+</script>
+
+</body>
+</html>

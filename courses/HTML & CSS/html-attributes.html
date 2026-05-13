@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سمات HTML (Attributes) | PhineX Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --neon: #39ff14;
+            --bg: #050505;
+            --card-bg: rgba(30, 30, 30, 0.95);
+            --text: #ffffff;
+            --error: #ff3333;
+            --success: #00e676;
+            --border: #333;
+        }
+
+        * { box-sizing: border-box; transition: 0.3s; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(145deg, #111, #000);
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        header h1 { color: var(--neon); font-size: 2.2rem; }
+
+        .info-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border-right: 4px solid var(--neon);
+        }
+
+        h2 { color: var(--neon); font-size: 1.5rem; margin-top: 0; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: #000;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px;
+            text-align: right;
+        }
+        th { background: #111; color: var(--neon); }
+        code { color: #ff00ff; font-weight: bold; font-family: monospace; }
+
+        /* Code Editor */
+        .editor-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .code-area { direction: ltr !important; text-align: left !important; }
+        textarea {
+            width: 100%;
+            height: 350px;
+            background: #000;
+            color: var(--neon);
+            border: 2px solid var(--border);
+            padding: 15px;
+            font-family: 'Consolas', monospace;
+            font-size: 15px;
+            border-radius: 8px;
+            outline: none;
+        }
+        iframe {
+            width: 100%;
+            height: 350px;
+            background: white;
+            border-radius: 8px;
+            border: none;
+        }
+
+        /* Quiz */
+        .quiz-box {
+            background: #0a0a0a;
+            border: 2px solid var(--border);
+            padding: 30px;
+            border-radius: 15px;
+        }
+        .q-item {
+            background: #151515;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #333;
+        }
+        .q-item.correct { border-left-color: var(--success); }
+        .q-item.wrong { border-left-color: var(--error); }
+
+        .btn-check {
+            background: var(--neon);
+            color: #000;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        #next-card {
+            display: none;
+            background: var(--success);
+            color: #000;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn-main {
+            text-decoration: none;
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 800px) { .editor-wrap { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>يعني إيه HTML Attributes؟ ⚙️</h1>
+        <p>الـ Attributes هي "الإعدادات" اللي بنحطها جوه التاج عشان نتحكم في سلوكه وشكله.</p>
+    </header>
+
+    <div class="info-card">
+        <h2>1. السمات العامة (Global Attributes)</h2>
+        <p>دي سمات "جوكر"، تنفع تتحط في أي تاج HTML في الدنيا:</p>
+        <table>
+            <tr><th>السمة</th><th>بتعمل إيه؟</th></tr>
+            <tr><td><code>id</code></td><td>اسم فريد للتاج (ممنوع يتكرر في نفس الصفحة). بنحتاجه في الـ JS.</td></tr>
+            <tr><td><code>class</code></td><td>اسم فئة، بنستخدمه عشان ندي نفس التنسيق لكذا عنصر بالـ CSS.</td></tr>
+            <tr><td><code>style</code></td><td>عشان تكتب كود CSS جوه التاج مباشرة (بس مش أحسن طريقة).</td></tr>
+            <tr><td><code>title</code></td><td>بيظهر رسالة صغيرة (Tooltip) لما تقف بالماوس على العنصر.</td></tr>
+            <tr><td><code>hidden</code></td><td>بيخفي العنصر تماماً من الصفحة.</td></tr>
+        </table>
+    </div>
+
+    <div class="info-card">
+        <h2>2. سمات اللينكات والصور (Specific)</h2>
+        <p>تاجات معينة ما تشتغلش من غير سماتها الخاصة:</p>
+        <table>
+            <tr><th>التاج</th><th>السمة</th><th>الشرح بالبلدي</th></tr>
+            <tr><td><code>&lt;a&gt;</code></td><td><code>href</code></td><td>عنوان الموقع اللي اللينك هيوديك ليه.</td></tr>
+            <tr><td><code>&lt;a&gt;</code></td><td><code>target="_blank"</code></td><td>بيفتح اللينك في صفحة (Tab) جديدة.</td></tr>
+            <tr><td><code>&lt;img&gt;</code></td><td><code>src</code></td><td>مسار أو لينك الصورة.</td></tr>
+            <tr><td><code>&lt;img&gt;</code></td><td><code>alt</code></td><td>نص بديل بيظهر لو الصورة ما حملتش (مهم جداً للـ SEO).</td></tr>
+        </table>
+    </div>
+
+    <div class="info-card">
+        <h2>3. سمات الفورمز (Inputs)</h2>
+        <p>دي اللي بتخلي المستخدم يتفاعل مع الموقع:</p>
+        <table>
+            <tr><th>السمة</th><th>الوظيفة</th></tr>
+            <tr><td><code>placeholder</code></td><td>كلام توضيحي جوه الخانة بيختفي لما تبدأ تكتب.</td></tr>
+            <tr><td><code>value</code></td><td>القيمة الحقيقية اللي جوه الخانة.</td></tr>
+            <tr><td><code>required</code></td><td>بيجبر المستخدم إنه ما يسيبش الخانة فاضية.</td></tr>
+            <tr><td><code>disabled</code></td><td>بيخلي الخانة موجودة بس ما تقدرش تدوس عليها أو تكتب فيها.</td></tr>
+            <tr><td><code>type</code></td><td>بيحدد نوع المدخل (text, password, email, checkbox).</td></tr>
+        </table>
+    </div>
+
+    <div class="info-card">
+        <h2>جرب تعدل في السمات 🛠️</h2>
+        <p>جرب تغير الـ <code>placeholder</code> أو الـ <code>src</code> وشوف التغيير:</p>
+        <div class="editor-wrap">
+            <div class="code-area">
+                <textarea id="code-in" oninput="update()">
+<!-- جرب تغير الـ target أو الـ placeholder -->
+<h2 title="أنا هيدر">قف هنا بالماوس</h2>
+
+<input type="text" placeholder="اكتب اسمك هنا...">
+
+<br><br>
+
+<a href="https://google.com" target="_blank">افتح جوجل في صفحة جديدة</a>
+
+<br><br>
+
+<button disabled>زرار مش شغال</button></textarea>
+            </div>
+            <iframe id="code-out"></iframe>
+        </div>
+    </div>
+
+    <div class="quiz-box">
+        <h2>كويز السمات (خلص الـ 5 صح عشان تعدي) 🏆</h2>
+        
+        <div class="q-item" id="q1">
+            <p>1. أنهي سمة بنستخدمها عشان نخلي اللينك يتفتح في صفحة جديدة؟</p>
+            <label><input type="radio" name="r1" value="a"> href</label><br>
+            <label><input type="radio" name="r1" value="b"> target="_blank"</label><br>
+            <label><input type="radio" name="r1" value="c"> new-tab</label>
+        </div>
+
+        <div class="q-item" id="q2">
+            <p>2. إيه السمة اللي بتعرض نص لو الصورة ما ظهرتش؟</p>
+            <label><input type="radio" name="r2" value="a"> title</label><br>
+            <label><input type="radio" name="r2" value="b"> src</label><br>
+            <label><input type="radio" name="r2" value="c"> alt</label>
+        </div>
+
+        <div class="q-item" id="q3">
+            <p>3. الـ <code>id</code> لازم يكون فريد وما يتكررش في نفس الصفحة؟</p>
+            <label><input type="radio" name="r3" value="true"> صح</label><br>
+            <label><input type="radio" name="r3" value="false"> غلط</label>
+        </div>
+
+        <div class="q-item" id="q4">
+            <p>4. السمة اللي بتخلي خانة الكتابة إجبارية هي:</p>
+            <label><input type="radio" name="r4" value="a"> must</label><br>
+            <label><input type="radio" name="r4" value="b"> required</label><br>
+            <label><input type="radio" name="r4" value="c"> important</label>
+        </div>
+
+        <div class="q-item" id="q5">
+            <p>5. لو عايز تدي كذا عنصر "نفس التنسيق" بالـ CSS، بتستخدم سمة الـ:</p>
+            <label><input type="radio" name="q5" value="class"> class</label><br>
+            <label><input type="radio" name="q5" value="id"> id</label><br>
+            <label><input type="radio" name="q5" value="style"> style</label>
+        </div>
+
+        <button class="btn-check" onclick="check()">تأكد من الإجابات</button>
+
+        <div id="next-card">
+            <h3>الله ينور! كدة أنت أستاذ في الـ Attributes 🎉</h3>
+            <p>الخطوة الجاية هي إزاي نربط الـ HTML بالـ CSS.</p>
+            <a href="index.html" class="btn-main" onclick="save()">الرجوع للقايمة</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function update() {
+        const code = document.getElementById('code-in').value;
+        document.getElementById('code-out').srcdoc = code;
+    }
+    update();
+
+    function check() {
+        const sol = { r1: "b", r2: "c", r3: "true", r4: "b", q5: "class" };
+        let score = 0;
+
+        for (let i = 1; i <= 5; i++) {
+            const key = (i === 5) ? 'q5' : 'r' + i;
+            const qDiv = document.getElementById(i === 5 ? 'q5' : 'q' + i); // Small fix for q5 ID
+            const selected = document.querySelector(`input[name="${key}"]:checked`);
+            
+            // Re-target the divs correctly
+            const targetDiv = i === 5 ? document.querySelector('.q-item:last-of-type') : document.getElementById('q'+i);
+
+            if (selected && selected.value === sol[key]) {
+                targetDiv.classList.add('correct');
+                targetDiv.classList.remove('wrong');
+                score++;
+            } else {
+                targetDiv.classList.add('wrong');
+                targetDiv.classList.remove('correct');
+            }
+        }
+
+        if (score === 5) {
+            document.getElementById('next-card').style.display = 'block';
+            document.querySelector('.btn-check').style.display = 'none';
+        } else {
+            alert(`جبت ${score} من 5. ركز في الإجابات الحمراء وحاول تاني!`);
+        }
+    }
+
+    function save() {
+        localStorage.setItem('lesson-attributes', 'completed');
+    }
+</script>
+
+</body>
+</html>

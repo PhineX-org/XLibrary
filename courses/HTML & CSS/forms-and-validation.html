@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موسوعة احتراف النماذج | PhineX Academy</title>
+    <style>
+        :root {
+            --primary: #39ff14;
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --text: #c9d1d9;
+            --code-bg: #000;
+            --accent: #f7df1e;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.7;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        .lesson-header {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #1f2937, #0d1117);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #30363d;
+        }
+
+        .lesson-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid #30363d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 { color: var(--primary); font-size: 1.8rem; margin-top: 0; }
+        h3 { color: var(--accent); font-size: 1.3rem; }
+
+        .explanation-box {
+            background: rgba(57, 255, 20, 0.05);
+            border-right: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            font-family: 'Consolas', monospace;
+            border: 1px solid #444;
+            margin: 15px 0;
+        }
+
+        .result-box {
+            background: #21262d;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px dashed var(--accent);
+            margin: 15px 0;
+        }
+
+        .mission-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: #1c2128;
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+        }
+
+        .question { margin-bottom: 25px; padding: 15px; background: #0d1117; border-radius: 10px; }
+        .options label { display: block; padding: 10px; cursor: pointer; transition: 0.3s; }
+        .options label:hover { background: rgba(255,255,255,0.05); }
+
+        button.check-btn {
+            background: var(--primary);
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="lesson-header">
+        <h1>إتقان هندسة النماذج (Forms Engine) 🛠️</h1>
+        <p>دليل شامل لبرمجة النماذج الذكية والتحقق من البيانات باحترافية.</p>
+    </div>
+
+    <!-- الكارت الأول: بنية النموذج -->
+    <div class="lesson-card">
+        <h2>1. بنية النموذج الأساسية (HTML Form Structure)</h2>
+        <div class="mission-badge">المهمة: إنشاء وعاء لجمع بيانات المستخدم وتحديد وجهتها.</div>
+        
+        <h3>الشرح التفصيلي:</h3>
+        <p>أي نموذج يبدأ بـ <code>&lt;form&gt;</code>. أهم خاصيتين هما:</p>
+        <ul>
+            <li><code>action</code>: عنوان الرابط (URL) اللي هيستلم البيانات.</li>
+            <li><code>method</code>: الطريقة (GET للبيانات البسيطة، أو POST للبيانات الحساسة).</li>
+        </ul>
+
+        <h3>الكود البرمجي:</h3>
+        <div class="code-block">
+&lt;form action="/submit-data" method="POST"&gt;<br>
+  &lt;label&gt;الاسم:&lt;/label&gt;<br>
+  &lt;input type="text" name="username" required&gt;<br>
+  &lt;button type="submit"&gt;إرسال&lt;/button&gt;<br>
+&lt;/form&gt;
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-box">
+            صندوق نصي يرفض الإرسال إذا كان فارغاً بفضل كلمة <code>required</code>، وعند الضغط على الزر يتم توجيه المتصفح للرابط المذكور في <code>action</code>.
+        </div>
+    </div>
+
+    <!-- الكارت الثاني: أنواع المدخلات -->
+    <div class="lesson-card">
+        <h2>2. أنواع المدخلات الذكية (Input Types)</h2>
+        <div class="mission-badge">المهمة: إجبار المستخدم على إدخال نوع محدد من البيانات (إيميل، رقم، تاريخ).</div>
+
+        <h3>الشرح التفصيلي:</h3>
+        <p>بدلاً من استخدام <code>type="text"</code> لكل شيء، نستخدم أنواعاً مخصصة تجعل المتصفح يساعدنا في التحقق:</p>
+        <div class="explanation-box">
+            - <b>Email:</b> يتأكد من وجود علامة @.<br>
+            - <b>Number:</b> يمنع كتابة الحروف ويظهر أزرار زيادة ونقصان.<br>
+            - <b>Range:</b> يظهر "منزلق" (Slider) لاختيار قيمة بين رقمين.
+        </div>
+
+        <h3>الكود البرمجي:</h3>
+        <div class="code-block">
+&lt;input type="email" placeholder="بريدك الإلكتروني"&gt;<br>
+&lt;input type="number" min="1" max="100"&gt;<br>
+&lt;input type="range" id="volume" min="0" max="10"&gt;<br>
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-box">
+            المتصفح سيظهر لوحة مفاتيح مخصصة للأرقام في الموبايل، وسيعترض فوراً إذا كتب المستخدم نصاً لا يحتوي على صيغة بريد إلكتروني.
+        </div>
+    </div>
+
+    <!-- الكارت الثالث: التحقق بالـ JavaScript -->
+    <div class="lesson-card">
+        <h2>3. التحقق المخصص (Custom JS Validation)</h2>
+        <div class="mission-badge">المهمة: منع إرسال النموذج برمجياً وفحص البيانات بشروط معقدة.</div>
+
+        <h3>الشرح التفصيلي:</h3>
+        <p>نستخدم <code>addEventListener</code> لمراقبة لحظة الإرسال، ثم <code>preventDefault()</code> لإيقاف العملية مؤقتاً حتى نتأكد من جودة البيانات.</p>
+
+        <h3>الكود البرمجي:</h3>
+        <div class="code-block">
+const myForm = document.querySelector('form');<br>
+
+myForm.addEventListener('submit', (event) => {<br>
+    const inputVal = document.getElementById('user').value;<br>
+    
+    if (inputVal.length < 5) {<br>
+        event.preventDefault(); // إيقاف الإرسال<br>
+        alert("خطأ: الاسم قصير جداً!");<br>
+    } else {<br>
+        console.log("تم التحقق بنجاح");<br>
+    }<br>
+});
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-box">
+            عند محاولة إرسال اسم أقل من 5 حروف، ستظهر رسالة تنبيه للمستخدم ولن يتم تحديث الصفحة أو إرسال البيانات، مما يحسن تجربة المستخدم ويحمي السيرفر.
+        </div>
+    </div>
+
+    <!-- الكارت الرابع: لغة التعبير النمطي (RegEx) -->
+    <div class="lesson-card">
+        <h2>4. الحارس القوي (RegEx Validation)</h2>
+        <div class="mission-badge">المهمة: مطابقة البيانات مع "نمط" محدد (مثل رقم موبايل يبدأ بـ 01).</div>
+
+        <h3>الشرح التفصيلي:</h3>
+        <p>الـ RegEx هي لغة رموز. مثلاً الرمز <code>/^\d{11}$/</code> يعني: "يجب أن يكون النص أرقاماً فقط وطوله بالضبط 11 رقماً".</p>
+
+        <h3>الكود البرمجي:</h3>
+        <div class="code-block">
+const phonePattern = /^[0-9]{11}$/;<br>
+const userPhone = "01234567890";<br>
+
+if (phonePattern.test(userPhone)) {<br>
+    console.log("رقم الهاتف صحيح");<br>
+} else {<br>
+    console.error("الرقم غير صالح");<br>
+}
+        </div>
+
+        <h3>النتيجة:</h3>
+        <div class="result-box">
+            هذا الكود سيسمح فقط بالأرقام التي تتكون من 11 خانة، مما يضمن أن المستخدم أدخل رقم هاتف حقيقياً قبل محاولة التسجيل.
+        </div>
+    </div>
+
+    <!-- قسم الاختبار -->
+    <div class="quiz-container">
+        <h2>اختبار مهارات النماذج 🧠</h2>
+        <p>جاوب على الأسئلة التالية لتثبيت معلوماتك:</p>
+
+        <div class="question" id="q1">
+            <p><b>س1: أي خاصية في HTML تجعل الحقل "إجبارياً" ولا يمكن تركه فارغاً؟</b></p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="wrong"> placeholder</label>
+                <label><input type="radio" name="q1" value="correct"> required</label>
+                <label><input type="radio" name="q1" value="wrong"> validate</label>
+            </div>
+        </div>
+
+        <div class="question" id="q2">
+            <p><b>س2: ما هو الأمر الذي يمنع النموذج من إرسال البيانات وعمل Refresh للصفحة؟</b></p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="wrong"> stop()</label>
+                <label><input type="radio" name="q2" value="wrong"> event.halt()</label>
+                <label><input type="radio" name="q2" value="correct"> event.preventDefault()</label>
+            </div>
+        </div>
+
+        <div class="question" id="q3">
+            <p><b>س3: أي نوع input نستخدمه للحصول على "منزلق" لاختيار قيمة بين 1 و 100؟</b></p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="correct"> type="range"</label>
+                <label><input type="radio" name="q3" value="wrong"> type="slider"</label>
+                <label><input type="radio" name="q3" value="wrong"> type="number"</label>
+            </div>
+        </div>
+
+        <button class="check-btn" onclick="checkAnswers()">تأكد من إجابتي</button>
+    </div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const answers = { q1: "correct", q2: "correct", q3: "correct" };
+        let score = 0;
+        let total = 3;
+
+        for (let key in answers) {
+            const selected = document.querySelector(`input[name="${key}"]:checked`);
+            if (selected && selected.value === answers[key]) {
+                score++;
+                document.getElementById(key).style.borderColor = "var(--primary)";
+            } else {
+                document.getElementById(key).style.borderColor = "red";
+            }
+        }
+
+        alert(`نتيجتك هي ${score} من ${total}`);
+        if (score === total) {
+            alert("مذهل! أنت الآن خبير في النماذج والتحقق!");
+        }
+    }
+</script>
+
+</body>
+</html>

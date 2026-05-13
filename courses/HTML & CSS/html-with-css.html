@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML with CSS | PhineX Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --neon: #39ff14;
+            --bg: #050505;
+            --card-bg: rgba(20, 20, 20, 0.98);
+            --text: #ffffff;
+            --error: #ff3333;
+            --success: #00e676;
+            --border: #333;
+        }
+
+        * { box-sizing: border-box; transition: 0.2s; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #111, var(--bg));
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+        header h1 { color: var(--neon); font-size: 2.8rem; text-shadow: 0 0 15px rgba(57, 255, 20, 0.2); }
+
+        .lesson-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-right: 5px solid var(--neon);
+        }
+
+        h2 { color: var(--neon); margin-top: 0; }
+        
+        /* Tables */
+        .props-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #000;
+        }
+        .props-table th, .props-table td {
+            border: 1px solid var(--border);
+            padding: 15px;
+            text-align: right;
+        }
+        .props-table th { background: #111; color: var(--neon); }
+        code { color: #00e5ff; font-weight: bold; direction: ltr; display: inline-block; }
+
+        /* Multi-Editor System */
+        .editor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .input-group { display: flex; flex-direction: column; gap: 10px; }
+        .code-header {
+            background: #222;
+            padding: 8px 15px;
+            border-radius: 5px 5px 0 0;
+            font-size: 0.9rem;
+            color: var(--neon);
+            display: flex;
+            justify-content: space-between;
+        }
+        textarea {
+            width: 100%;
+            height: 250px;
+            background: #000;
+            color: #d1d1d1;
+            border: 1px solid var(--border);
+            padding: 15px;
+            font-family: 'Consolas', monospace;
+            resize: none;
+            outline: none;
+            direction: ltr !important;
+            text-align: left !important;
+        }
+        #preview-frame {
+            grid-column: span 2;
+            width: 100%;
+            height: 300px;
+            background: white;
+            border-radius: 10px;
+            border: 5px solid #222;
+        }
+
+        /* Quiz */
+        .quiz-container {
+            background: #0a0a0a;
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+        }
+        .q-wrap {
+            background: #151515;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #333;
+        }
+        .q-wrap.correct { border-left-color: var(--success); }
+        .q-wrap.wrong { border-left-color: var(--error); }
+        
+        .opt label { display: block; padding: 12px; background: #222; margin: 8px 0; border-radius: 5px; cursor: pointer; }
+        .opt input { margin-left: 10px; }
+
+        .btn-check {
+            background: var(--neon);
+            color: black;
+            border: none;
+            padding: 18px;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        #success-box {
+            display: none;
+            background: var(--success);
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .finish-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: black;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) { .editor-grid { grid-template-columns: 1fr; } #preview-frame { grid-column: span 1; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>HTML مع CSS: الروح والألوان 🎨</h1>
+        <p>الـ HTML هو العضم، والـ CSS هو الشكل واللبس والديكور اللي بيخلي الموقع يبهر الناس.</p>
+    </header>
+
+    <div class="lesson-card">
+        <h2>1. إزاي نربط الـ CSS بالـ HTML؟</h2>
+        <p>عندك 3 طرق عشان تدي ألوان وحياة لصفحتك:</p>
+        <table class="props-table">
+            <tr><th>الطريقة</th><th>مكانها</th><th>الاستخدام</th></tr>
+            <tr><td><code>Inline CSS</code></td><td>جوه التاج نفسه بـ <code>style=""</code></td><td>لتغيير سريع لعنصر واحد بس (مش مفضل).</td></tr>
+            <tr><td><code>Internal CSS</code></td><td>جوه الـ <code>&lt;head&gt;</code> في تاج <code>&lt;style&gt;</code></td><td>لو صفحة واحدة وعايز تنسقها بسرعة.</td></tr>
+            <tr><td><code>External CSS</code></td><td>ملف بره بصيغة <code>.css</code></td><td>أحسن طريقة للمشاريع الكبيرة (نفس الملف بيشغل كذا صفحة).</td></tr>
+        </table>
+    </div>
+
+    <div class="lesson-card">
+        <h2>2.  خاصيات في الـ CSS (بالتصنيف)</h2>
+        <p>الـ CSS بحر، بس دول أهم أدوات هتحتاجهم عشان تكون محترف:</p>
+        
+        <h3>أ. الألوان والخلفيات (Colors & Backgrounds)</h3>
+        <table class="props-table">
+            <tr><td><code>color</code></td><td>لون الكلام.</td></tr>
+            <tr><td><code>background-color</code></td><td>لون الخلفية.</td></tr>
+            <tr><td><code>background-image</code></td><td>تحط صورة كخلفية.</td></tr>
+            <tr><td><code>opacity</code></td><td>درجة الشفافية.</td></tr>
+        </table>
+
+        <h3>ب. المساحات (The Box Model) 📦</h3>
+        <table class="props-table">
+            <tr><td><code>width</code> / <code>height</code></td><td>العرض والطول.</td></tr>
+            <tr><td><code>margin</code></td><td>المساحة الفاضية "بره" العنصر (بتبعده عن غيره).</td></tr>
+            <tr><td><code>padding</code></td><td>المساحة الفاضية "جوه" العنصر (بتبعد الكلام عن الحواف).</td></tr>
+            <tr><td><code>border</code></td><td>البرواز بتاع العنصر (سمكه، لونه، وشكله).</td></tr>
+        </table>
+
+        <h3>ج. توزيع العناصر (Layout)</h3>
+        <table class="props-table">
+            <tr><td><code>display: flex</code></td><td>أقوى أداة لتوزيع العناصر جنب بعض أو تحت بعض بسهولة.</td></tr>
+            <tr><td><code>display: grid</code></td><td>لعمل شبكة معقدة من الصفوف والأعمدة.</td></tr>
+            <tr><td><code>position</code></td><td>مكان العنصر (ثابت <code>fixed</code>، متحرك <code>absolute</code>، أو عادي).</td></tr>
+        </table>
+    </div>
+    <div class="lesson-card">
+    <h2>4. سحر الخطوط (Typography)</h2>
+    <p>الخط مش مجرد كلام، ده روح الموقع. دي أهم الخصائص اللي بتتحكم فيه:</p>
+    <table class="props-table">
+        <tr><th>الخاصية</th><th>بتعمل إيه؟</th></tr>
+        <tr><td><code>font-family</code></td><td>بتحدد نوع الخط (زي Arial أو Tajawal).</td></tr>
+        <tr><td><code>font-size</code></td><td>حجم الكلام (بالـ px أو rem).</td></tr>
+        <tr><td><code>font-weight</code></td><td>ثقل الخط (عريض Bold أو رفيع Light).</td></tr>
+        <tr><td><code>line-height</code></td><td>المسافة بين السطور (مهمة جداً لراحة العين).</td></tr>
+        <tr><td><code>text-align</code></td><td>محاذاة النص (يمين، شمال، أو في النص).</td></tr>
+        <tr><td><code>text-transform</code></td><td>بتخلي الحروف كلها Capital أو Small (للإنجليزي).</td></tr>
+    </table>
+</div>
+<div class="lesson-card">
+    <h2>5. توزيع العناصر بذكاء (Flexbox)</h2>
+    <p>لو عايز تحط 3 صناديق جنب بعض وتوسطنهم، الـ Flex هو الحل السحري:</p>
+    <table class="props-table">
+        <tr><th>الخاصية</th><th>الوظيفة بالبلدي</th></tr>
+        <tr><td><code>display: flex;</code></td><td>بتقول للأب: "وزع ولادك بنظام الفليكس".</td></tr>
+        <tr><td><code>flex-direction</code></td><td>العناصر هترص جنب بعض (row) ولا تحت بعض (column)؟</td></tr>
+        <tr><td><code>justify-content</code></td><td>توزيع العناصر بالعرض (في النص، في الأول، أو مسافات بينهم).</td></tr>
+        <tr><td><code>align-items</code></td><td>توزيع العناصر بالطول (توسطنهم من فوق وتحت).</td></tr>
+        <tr><td><code>gap</code></td><td>المسافة الفاضية بين العناصر وبعضها.</td></tr>
+    </table>
+</div>
+<div class="lesson-card">
+    <h2>6. الحركة والأنيميشن (Animations)</h2>
+    <p>إزاي تخلي الزرار ينور لما تقف عليه أو الصورة تلف؟</p>
+    <table class="props-table">
+        <tr><th>الخاصية</th><th>بتعمل إيه؟</th></tr>
+        <tr><td><code>transition</code></td><td>بتحدد سرعة التغيير (مثلاً اللون يتغير في نص ثانية).</td></tr>
+        <tr><td><code>transform: scale()</code></td><td>بتكبر أو تصغر العنصر.</td></tr>
+        <tr><td><code>transform: rotate()</code></td><td>بتلف العنصر بزاوية معينة.</td></tr>
+        <tr><td><code>@keyframes</code></td><td>بتصمم فيها حركة معقدة من البداية للنهاية.</td></tr>
+        <tr><td><code>animation</code></td><td>بتربط الحركة اللي صممتها بالعنصر بتاعك.</td></tr>
+    </table>
+</div>
+<div class="lesson-card">
+    <h2>7. التجاوب مع الموبايل (Media Queries)</h2>
+    <p>إزاي تخلي الموقع يغير شكله حسب حجم الشاشة؟</p>
+    <table class="props-table">
+        <tr><th>الكود</th><th>بيعمل إيه؟</th></tr>
+        <tr><td><code>@media (max-width: 600px)</code></td><td>أي كود هنا هيتنفذ "فقط" على شاشات الموبايل.</td></tr>
+        <tr><td><code>view-port</code></td><td>تاج في الـ HTML بيعرف المتصفح حجم الشاشة الحقيقي.</td></tr>
+        <tr><td><code>flex-wrap: wrap</code></td><td>بتخلي العناصر تنزل تحت بعض لو المساحة صغرت.</td></tr>
+    </table>
+</div>
+<div class="lesson-card">
+    <h2>8. المتغيرات (CSS Variables)</h2>
+    <p>بدل ما تكتب كود اللون في كل حتة، احفظه في متغير واستخدمه باسمه:</p>
+    <table class="props-table">
+        <tr><th>الكود</th><th>الشرح</th></tr>
+        <tr><td><code>:root { --main-color: #39ff14; }</code></td><td>تعريف لون نيون أساسي للموقع كله.</td></tr>
+        <tr><td><code>color: var(--main-color);</code></td><td>استدعاء اللون في أي مكان.</td></tr>
+    </table>
+    <blockquote>
+        <strong>نصيحة محترفين:</strong> استخدمي المتغيرات عشان لو حبيتي تعملي "Dark Mode" و "Light Mode" بضغطة واحدة.
+    </blockquote>
+</div>
+<div class="lesson-card">
+    <h2>9. الحالات الخاصة (Pseudo-classes)</h2>
+    <p>تنسيقات بتظهر بس في حالات معينة:</p>
+    <table class="props-table">
+        <tr><th>الحالة</th><th>بتحصل إمتى؟</th></tr>
+        <tr><td><code>:hover</code></td><td>لما المستخدم يقف بالماوس على العنصر.</td></tr>
+        <tr><td><code>:active</code></td><td>لما المستخدم يدوس (Click) على العنصر.</td></tr>
+        <tr><td><code>:focus</code></td><td>لما المستخدم يضغط جوه خانة كتابة (Input).</td></tr>
+        <tr><td><code>:nth-child()</code></td><td>لو عايز تلون مثلاً الصفوف الزوجية بس في جدول.</td></tr>
+    </table>
+</div>
+<!-- كارت 10: الـ Grid (الوحش بتاع التوزيع) -->
+<div class="lesson-card">
+    <h2>10. وحش التقسيم (CSS Grid)</h2>
+    <p>لو الـ Flexbox بيوزع في اتجاه واحد، الـ Grid بيقسم الصفحة لصفوف وأعمدة زي الجدول بالظبط:</p>
+    <table class="props-table">
+        <tr><th>الخاصية</th><th>بتعمل إيه؟</th></tr>
+        <tr><td><code>display: grid;</code></td><td>بتحول العنصر لشبكة (Grid Container).</td></tr>
+        <tr><td><code>grid-template-columns</code></td><td>بتحدد عدد الأعمدة وعرض كل واحد (مثلاً: 1fr 1fr 1fr).</td></tr>
+        <tr><td><code>grid-template-rows</code></td><td>بتحدد عدد الصفوف وطولها.</td></tr>
+        <tr><td><code>grid-area</code></td><td>بتسمي مكان معين في الشبكة عشان تحط فيه عنصر.</td></tr>
+        <tr><td><code>place-items: center;</code></td><td>توسطن كل حاجة جوه الشبكة "طول وعرض" في سطر واحد.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 11: أماكن العناصر (Positioning) -->
+<div class="lesson-card">
+    <h2>11. تثبيت وتحريك العناصر (Positioning)</h2>
+    <p>إزاي تتحكم في مكان العنصر بالملي، وتخليه يطير فوق عناصر تانية:</p>
+    <table class="props-table">
+        <tr><th>النوع</th><th>بيعمل إيه بالبلدي؟</th></tr>
+        <tr><td><code>static</code></td><td>المكان الطبيعي (ده العادي بتاع أي عنصر).</td></tr>
+        <tr><td><code>relative</code></td><td>بيتحرك بالنسبة لمكانه الأصلي، بس بيفضل سايب مكانه فاضي.</td></tr>
+        <tr><td><code>absolute</code></td><td>بيطير ويتحرك بالنسبة لأقرب أب له نوعه <code>relative</code>.</td></tr>
+        <tr><td><code>fixed</code></td><td>بيتلزق في الشاشة وما بيتحركش حتى لو عملت سكرول (زي القايمة).</td></tr>
+        <tr><td><code>sticky</code></td><td>بيمشي معاك في السكرول لحد نقطة معينة وبعدين يثبت.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 12: الظلال والعمق (Shadows) -->
+<div class="lesson-card">
+    <h2>12. الظلال والعمق (Shadows)</h2>
+    <p>الظلال هي اللي بتخلي العنصر "بارز" وشكله 3D:</p>
+    <table class="props-table">
+        <tr><th>الخاصية</th><th>الشرح</th></tr>
+        <tr><td><code>box-shadow</code></td><td>ظل للصندوق (يمين، تحت، درجة التمويه، اللون).</td></tr>
+        <tr><td><code>text-shadow</code></td><td>ظل للكلام نفسه، بيخليه شيك جداً في العناوين.</td></tr>
+        <tr><td><code>inset</code></td><td>كلمة بتتحط جوه الـ box-shadow بتخلي الظل "لجوه" مش لبره.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 13: الفلاتر (CSS Filters) -->
+<div class="lesson-card">
+    <h2>13. فلاتر الصور (Filters)</h2>
+    <p>مش محتاجة فوتوشوب! تقدري تعدلي الصور بالكود بس:</p>
+    <table class="props-table">
+        <tr><th>الفلتر</th><th>بيعمل إيه؟</th></tr>
+        <tr><td><code>filter: blur(5px);</code></td><td>بيخلي الصورة "مزغللة".</td></tr>
+        <tr><td><code>filter: grayscale(100%);</code></td><td>بيخلي الصورة أبيض وإسود تماماً.</td></tr>
+        <tr><td><code>filter: brightness(1.5);</code></td><td>بيزود إضاءة الصورة.</td></tr>
+        <tr><td><code>filter: drop-shadow();</code></td><td>بيعمل ظل "حقيقي" حوالين شكل العنصر (حتى لو صورة شفافة).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 14: الطبقات (Z-Index) -->
+<div class="lesson-card">
+    <h2>14. ترتيب الطبقات (Z-Index)</h2>
+    <p>لما العناصر تركب فوق بعضها، مين اللي يبان قدام ومين ورا؟</p>
+    <table class="props-table">
+        <tr><th>القيمة</th><th>القاعدة</th></tr>
+        <tr><td><code>z-index: 1;</code></td><td>العنصر اللي رقمه أكبر هو اللي بيطلع قدام.</td></tr>
+        <tr><td><code>z-index: -1;</code></td><td>بيخلي العنصر يستخبى ورا العناصر التانية (زي خلفية).</td></tr>
+    </table>
+    <p>⚠️ **ملحوظة:** الـ <code>z-index</code> مش بيشتغل غير لو العنصر واخد <code>position</code> (غير الـ static).</p>
+</div>
+
+<!-- كارت 15: التحكم في الصور (Object-fit) -->
+<div class="lesson-card">
+    <h2>15. احتواء الصور (Object-fit)</h2>
+    <p>لو عندك صورة وعايزة تحطيها في مربع من غير ما تتمط أو شكلها يبوظ:</p>
+    <table class="props-table">
+        <tr><th>القيمة</th><th>النتيجة</th></tr>
+        <tr><td><code>object-fit: cover;</code></td><td>الصورة بتملى المربع وبتقص الزيادة (أحسن اختيار).</td></tr>
+        <tr><td><code>object-fit: contain;</code></td><td>الصورة بتبان كلها جوه المربع حتى لو في فراغات.</td></tr>
+        <tr><td><code>aspect-ratio</code></td><td>بتحدد نسبة الطول للعرض (مثلاً 16/9) عشان الصور ما تبوظش.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 16: التدريج اللوني (Gradients) -->
+<div class="lesson-card">
+    <h2>16. الألوان المتداخلة (Gradients)</h2>
+    <p>بدل اللون السادة، ممكن تدمجي كذا لون مع بعض:</p>
+    <table class="props-table">
+        <tr><th>النوع</th><th>الكود</th></tr>
+        <tr><td><code>linear-gradient</code></td><td>ألوان ماشية في خط مستقيم (بالطول أو العرض).</td></tr>
+        <tr><td><code>radial-gradient</code></td><td>ألوان طالعة من المركز لبره على شكل دايرة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 17: المحتوى الزائد (Overflow) -->
+<div class="lesson-card">
+    <h2>17. المحتوى الزايد (Overflow)</h2>
+    <p>لو الكلام كتير على المربع بتاعه، نتصرف إزاي؟</p>
+    <table class="props-table">
+        <tr><th>الحل</th><th>بيعمل إيه؟</th></tr>
+        <tr><td><code>overflow: hidden;</code></td><td>بيقص أي حاجة تخرج بره حدود المربع.</td></tr>
+        <tr><td><code>overflow: scroll;</code></td><td>بيظهر "سكرول بار" عشان نقدر نشوف الباقي.</td></tr>
+        <tr><td><code>text-overflow: ellipsis;</code></td><td>بيحط 3 نقط (...) لو الكلام زاد عن السطر.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 18: المؤشرات (Cursors) -->
+<div class="lesson-card">
+    <h2>18. شكل الماوس (Cursors)</h2>
+    <p>بتعرف المستخدم إنه ممكن يدوس هنا أو إن المكان ده للقراءة بس:</p>
+    <table class="props-table">
+        <tr><td><code>cursor: pointer;</code></td><td>شكل "الإيد" (للزراير واللينكات).</td></tr>
+        <tr><td><code>cursor: not-allowed;</code></td><td>علامة "ممنوع" (للحاجات اللي مش شغالة).</td></tr>
+        <tr><td><code>cursor: wait;</code></td><td>علامة "التحميل" (لو في حاجة بتحمل).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 19: تنسيق القوائم (Lists) -->
+<div class="lesson-card">
+    <h2>19. تنسيق القوائم (Lists & Markers)</h2>
+    <p>عشان تغيري شكل النقط أو الأرقام في القائمة:</p>
+    <table class="props-table">
+        <tr><td><code>list-style: none;</code></td><td>بتشيل النقط خالص (مهمة جداً للقايمة).</td></tr>
+        <tr><td><code>list-style-type</code></td><td>تغير النقط لدايرة، مربع، أو أرقام رومانية.</td></tr>
+        <tr><td><code>::marker</code></td><td>خاصية جديدة بتخليكي تلوني النقطة نفسها بعيد عن الكلام.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 20: المنطق الحديث (Logical Properties) -->
+<div class="lesson-card">
+    <h2>20. البرمجة الذكية (Logical Properties)</h2>
+    <p>بدل ما تقولي <code>margin-right</code>، قولي <code>margin-inline-end</code> عشان الكود يظبط نفسه لو الموقع اتقلب من عربي لإنجليزي لوحده!</p>
+    <table class="props-table">
+        <tr><th>القديم</th><th>الجديد (الذكي)</th></tr>
+        <tr><td><code>margin-left / right</code></td><td><code>margin-inline-start / end</code></td></tr>
+        <tr><td><code>padding-top / bottom</code></td><td><code>padding-block-start / end</code></td></tr>
+        <tr><td><code>width / height</code></td><td><code>inline-size / block-size</code></td></tr>
+    </table>
+</div>
+<!-- كارت 21: تقسيم المقالات (Multi-column) -->
+<div class="lesson-card">
+    <h2>21. تقسيم النصوص (Multi-column)</h2>
+    <p>لو عندك نص طويل وعايزة تقسميه لأعمدة زي الجرائد والمجلات:</p>
+    <table class="props-table">
+        <tr><th>الخاصية</th><th>بتعمل إيه؟</th></tr>
+        <tr><td><code>column-count</code></td><td>بتحدد عدد الأعمدة (مثلاً 3 أعمدة).</td></tr>
+        <tr><td><code>column-gap</code></td><td>المسافة الفاضية بين الأعمدة.</td></tr>
+        <tr><td><code>column-rule</code></td><td>بيعمل خط فاصل بين الأعمدة (زي الـ border).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 22: حجم الصندوق الحقيقي (Box Sizing) -->
+<div class="lesson-card">
+    <h2>22. سر المقاسات (Box Sizing)</h2>
+    <p>أهم خاصية عشان مقاساتك ما تبوظش لما تزودي الـ Padding أو الـ Border:</p>
+    <table class="props-table">
+        <tr><th>القيمة</th><th>التأثير</th></tr>
+        <tr><td><code>content-box</code></td><td>ده العادي (الـ padding بيزود حجم العنصر الكلي).</td></tr>
+        <tr><td><code>border-box</code></td><td>الاختيار الذكي (الـ padding بياكل من جوه العنصر والمقاس بيفضل ثابت).</td></tr>
+    </table>
+    <blockquote>نصيحة: دايماً بنحط <code>box-sizing: border-box;</code> لكل العناصر في أول الكود.</blockquote>
+</div>
+
+<!-- كارت 23: سكرول احترافي (Scroll Snapping) -->
+<div class="lesson-card">
+    <h2>23. ثبات السكرول (Scroll Snapping)</h2>
+    <p>عشان تعملي Slider أو معرض صور "بيثبت" على الصورة بالظبط لما المستخدم يقلب:</p>
+    <table class="props-table">
+        <tr><th>الكود</th><th>الوظيفة</th></tr>
+        <tr><td><code>scroll-snap-type: x mandatory;</code></td><td>بتتحط للأب عشان تجبر السكرول يثبت بالعرض.</td></tr>
+        <tr><td><code>scroll-snap-align: center;</code></td><td>بتتحط للإبن عشان يثبت في نص الشاشة بالظبط.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 24: الأشكال الهندسية (Clip-path) -->
+<div class="lesson-card">
+    <h2>24. قص الأشكال (Clip-path)</h2>
+    <p>بدل ما المربعات تكون مملة، تقدري تقصي العنصر على شكل مثلث، دايرة، أو حتى نجمة:</p>
+    <table class="props-table">
+        <tr><th>الدالة</th><th>النتيجة</th></tr>
+        <tr><td><code>clip-path: circle();</code></td><td>بيحول المربع لدايرة.</td></tr>
+        <tr><td><code>clip-path: polygon();</code></td><td>بترسمي أي شكل هندسي عن طريق نقط (X, Y).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 25: التحكم في التفاعل (Pointer Events) -->
+<div class="lesson-card">
+    <h2>25. التحكم في اللمس (Pointer Events)</h2>
+    <p>إزاي تخلي الماوس "يخترق" عنصر وما يحسش بيه، أو تمنعي الضغط على زرار معين:</p>
+    <table class="props-table">
+        <tr><th>القيمة</th><th>الشرح بالبلدي</th></tr>
+        <tr><td><code>pointer-events: none;</code></td><td>العنصر بيبقى زي "الخيال"، الماوس بيعدي من فوقه ولا كأنه موجود.</td></tr>
+        <tr><td><code>user-select: none;</code></td><td>بتمنع المستخدم إنه يحدد (Highlight) الكلام بالماوس.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 26: خلفيات سينمائية (Background Attachment) -->
+<div class="lesson-card">
+    <h2>26. تأثير البارالاكس (Background Attachment)</h2>
+    <p>عشان تخلي الخلفية ثابتة والكلام هو اللي بيتحرك فوقيها (تأثير Parallax):</p>
+    <table class="props-table">
+        <tr><td><code>background-attachment: fixed;</code></td><td>الخلفية بتثبت مكانها والكلام بيتزحلق فوقيها.</td></tr>
+        <tr><td><code>background-size: cover;</code></td><td>عشان الخلفية تملى المكان مهما كان حجم الشاشة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 27: عدادات الـ CSS (Counters) -->
+<div class="lesson-card">
+    <h2>27. الترقيم التلقائي (CSS Counters)</h2>
+    <p>تقدري تخلي الـ CSS يرقم العناوين أو العناصر لوحده من غير ما تكتبي أرقام يدوي:</p>
+    <table class="props-table">
+        <tr><th>الخاصية</th><th>الوظيفة</th></tr>
+        <tr><td><code>counter-reset</code></td><td>بتصفي العداد (بتبدأ من صفر).</td></tr>
+        <tr><td><code>counter-increment</code></td><td>بتزود العداد واحد كل ما يقابل العنصر.</td></tr>
+        <tr><td><code>content: counter();</code></td><td>بتعرض الرقم جوه الـ <code>::before</code> أو <code>::after</code>.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 28: تحديد الاتجاه (Writing Mode) -->
+<div class="lesson-card">
+    <h2>28. اتجاه الكتابة (Writing Mode)</h2>
+    <p>لو عايزة تخلي الكلام يتكتب بالطول (من فوق لتحت) زي المواقع اليابانية أو التصاميم المودرن:</p>
+    <table class="props-table">
+        <tr><th>القيمة</th><th>التأثير</th></tr>
+        <tr><td><code>writing-mode: vertical-rl;</code></td><td>الكتابة بتبقى راسية من اليمين للشمال.</td></tr>
+        <tr><td><code>direction: rtl;</code></td><td>الاتجاه الأساسي (يمين لشمال) للعربي.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 29: البرواز الخارجي (Outline) -->
+<div class="lesson-card">
+    <h2>29. البرواز الخارجي (Outline)</h2>
+    <p>الـ Outline بيفرق عن الـ Border إنه مش بياخد مساحة من حجم العنصر (ما بيزقش جيرانه):</p>
+    <table class="props-table">
+        <tr><td><code>outline-style</code></td><td>شكل الخط (solid, dashed, dotted).</td></tr>
+        <tr><td><code>outline-offset</code></td><td>بيعمل مسافة فاضية بين الـ Border والـ Outline.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 30: دمج الألوان (Mix Blend Mode) -->
+<div class="lesson-card">
+    <h2>30. دمج الألوان (Mix Blend Mode)</h2>
+    <p>نفس فكرة الـ Blending في الفوتوشوب، بتخلي العنصر يتفاعل مع ألوان اللي تحته:</p>
+    <table class="props-table">
+        <tr><td><code>mix-blend-mode: multiply;</code></td><td>بيدمج الألوان الغامقة.</td></tr>
+        <tr><td><code>mix-blend-mode: screen;</code></td><td>بيدمج الألوان الفاتحة.</td></tr>
+        <tr><td><code>mix-blend-mode: overlay;</code></td><td>بيعمل تداخل قوي بين العنصر والخلفية.</td></tr>
+    </table>
+</div>
+<!-- كارت 31: التناسب الذكي (Aspect Ratio) -->
+<div class="lesson-card">
+    <h2>31. توازن الأبعاد (Aspect Ratio)</h2>
+    <p>بدل ما تحسب الطول والعرض يدوي، الخاصية دي بتخلي العنصر يحافظ على نسبته (زي 16:9) مهما كبر أو صغر:</p>
+    <table class="props-table">
+        <tr><th>الكود</th><th>الاستخدام</th></tr>
+        <tr><td><code>aspect-ratio: 16 / 9;</code></td><td>مثالي للفيديوهات عشان ما تظهرش "ممطوطة".</td></tr>
+        <tr><td><code>aspect-ratio: 1 / 1;</code></td><td>بيخلي العنصر مربع مثالي (مفيد جداً لصور البروفايل).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 32: لون التفاعل (Accent Color) -->
+<div class="lesson-card">
+    <h2>32. تلوين عناصر المتصفح (Accent Color)</h2>
+    <p>تعبت من لون الـ Checkbox الأزرق بتاع الويندوز؟ الخاصية دي بتغير ألوان عناصر الفورم بكلمة واحدة:</p>
+    <table class="props-table">
+        <tr><td><code>accent-color: #39ff14;</code></td><td>بتغير لون الـ Checkboxes والـ Radio buttons للون النيون بتاعك.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 33: تأثير الزجاج (Backdrop Filter) -->
+<div class="lesson-card">
+    <h2>33. تأثير الزجاج المحبب (Glassmorphism)</h2>
+    <p>ده السر وراء شكل الـ Control Center في الآيفون، بيخلي الخلفية "مزغللة" تحت العنصر:</p>
+    <table class="props-table">
+        <tr><td><code>backdrop-filter: blur(10px);</code></td><td>بيعمل زغللة للحاجة اللي "ورا" العنصر مش العنصر نفسه.</td></tr>
+        <tr><td><code>background: rgba(255,255,255,0.1);</code></td><td>لازم تستخدم لون شفاف معاه عشان التأثير يبان.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 34: الحجم المرن (Clamp) -->
+<div class="lesson-card">
+    <h2>34. الحجم الذكي (Clamp Function)</h2>
+    <p>أقوى دالة في الـ CSS بتخلي الخط يكبر ويصغر معاك بس بحدود (أدنى وأقصى حجم):</p>
+    <table class="props-table">
+        <tr><th>المعادلة</th><th>الشرح</th></tr>
+        <tr><td><code>font-size: clamp(1rem, 5vw, 3rem);</code></td><td>الخط مش هيقل عن 1rem ولا هيزيد عن 3rem، وبينهم هيتحرك حسب حجم الشاشة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 35: كود الحماية (Isolation) -->
+<div class="lesson-card">
+    <h2>35. عزل الطبقات (Isolation)</h2>
+    <p>لو عندك عناصر واخدة <code>z-index</code> ومبوزة ترتيب الصفحة، الخاصية دي بتعمل "حدود" للطبقات:</p>
+    <table class="props-table">
+        <tr><td><code>isolation: isolate;</code></td><td>بتجبر العناصر اللي جوه الصندوق إنها تترتب مع بعضها بس، وما تتدخلش في ترتيب باقي الصفحة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 36: اختصار الاتجاهات (Inset) -->
+<div class="lesson-card">
+    <h2>36. اختصار المسافات (Inset)</h2>
+    <p>بدل ما تكتب top, right, bottom, left كل واحدة في سطر لما تعمل <code>absolute</code>، استخدم دي:</p>
+    <table class="props-table">
+        <tr><td><code>inset: 10px;</code></td><td>بتعوض عن الـ 4 اتجاهات في كلمة واحدة.</td></tr>
+        <tr><td><code>inset: 0 20px;</code></td><td>صفر فوق وتحت، و20 يمين وشمال.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 37: شكل المؤشر (Caret Color) -->
+<div class="lesson-card">
+    <h2>37. لون مؤشر الكتابة (Caret Color)</h2>
+    <p>عشان تخلي حتى "العصاية" اللي بتنور وتطفي جوه الـ Input لونها نيون:</p>
+    <table class="props-table">
+        <tr><td><code>caret-color: var(--neon);</code></td><td>بتغير لون مؤشر الكتابة للون اللي تحبه.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 38: الماسك (Masking) -->
+<div class="lesson-card">
+    <h2>38. قناع الصور (Masking)</h2>
+    <p>زي الـ Layer Mask في الفوتوشوب، بتخلي الصورة تظهر جوه شكل معين (زي لوجو أو كلمة):</p>
+    <table class="props-table">
+        <tr><td><code>mask-image</code></td><td>بتحط صورة (أبيض وإسود) تحدد فين يظهر وفين يختفي.</td></tr>
+        <tr><td><code>mask-size: contain;</code></td><td>عشان الماسك يظبط على قد العنصر.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 39: لمسة السكرول (Scroll Behavior) -->
+<div class="lesson-card">
+    <h2>39. نعومة الحركة (Scroll Behavior)</h2>
+    <p>لما تدوس على لينك يوديك لآخر الصفحة، بلاش يروح "قفش"، خليه يروح بنعومة:</p>
+    <table class="props-table">
+        <tr><td><code>scroll-behavior: smooth;</code></td><td>بتخلي الصفحة تتزحلق بنعومة لما تدوس على اللينكات الداخلية.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 40: التحكم في السحب (Touch Action) -->
+<div class="lesson-card">
+    <h2>40. منع الهبد في الموبايل (Touch Action)</h2>
+    <p>لو بتعمل لعبة أو تطبيق موبايل وعايز تمنع المتصفح إنه يعمل Zoom أو Scroll لما المستخدم يلمس الشاشة:</p>
+    <table class="props-table">
+        <tr><td><code>touch-action: none;</code></td><td>بتوقف كل حركات اللمس الافتراضية عشان تبرمجها إنت بالـ JS.</td></tr>
+        <tr><td><code>touch-action: pan-y;</code></td><td>بتسمح بالسكرول بالطول بس وتمنع العرض.</td></tr>
+    </table>
+</div>
+<!-- كارت 41: الحسابات البرمجية (CSS Math) -->
+<div class="lesson-card">
+    <h2>41. الحسابات البرمجية (Math Functions)</h2>
+    <p>الـ CSS بقى بيعرف يحسب! مش محتاج تحسب المقاسات يدوي:</p>
+    <table class="props-table">
+        <tr><th>الدالة</th><th>الاستخدام</th></tr>
+        <tr><td><code>calc(100% - 50px)</code></td><td>بتطرح أو تجمع مقاسات مختلفة (نسبة مع بكسل).</td></tr>
+        <tr><td><code>min() / max()</code></td><td>بتختار أصغر أو أكبر قيمة من مجموعة قيم.</td></tr>
+        <tr><td><code>round()</code></td><td>بتقرب الأرقام لأقرب رقم صحيح (خاصية حديثة).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 42: الانعكاس (Box Reflect) -->
+<div class="lesson-card">
+    <h2>42. تأثير الانعكاس (Box Reflect)</h2>
+    <p>عشان تعمل تأثير "المراية" تحت الصور أو الكلام:</p>
+    <table class="props-table">
+        <tr><td><code>-webkit-box-reflect: below 2px;</code></td><td>بيعمل انعكاس للعنصر تحت نفسه بمسافة 2 بكسل.</td></tr>
+        <tr><td><code>linear-gradient</code></td><td>ممكن تدمجها مع الانعكاس عشان يختفي بالتدريج.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 43: التداخل المرئي (Object-position) -->
+<div class="lesson-card">
+    <h2>43. سنترة الصور (Object-position)</h2>
+    <p>لو الصورة واخدة <code>object-fit: cover</code>، الخاصية دي بتحدد أنهي جزء يفضل باين:</p>
+    <table class="props-table">
+        <tr><td><code>object-position: top center;</code></td><td>بيخلي التركيز على الجزء العلوي من الصورة (مهم للصور الشخصية).</td></tr>
+        <tr><td><code>object-position: 20% 80%;</code></td><td>بتحرك الصورة يمين وشمال وبالطول بالملي.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 44: الكتابة داخل أشكال (Shape-outside) -->
+<div class="lesson-card">
+    <h2>44. انسياب النص (Shape-outside)</h2>
+    <p>عايز الكلام يلف حوالين صورة دائرية مش مربعة؟ دي الخاصية اللي بتعمل كده:</p>
+    <table class="props-table">
+        <tr><td><code>shape-outside: circle();</code></td><td>بتخلي الكلام يلف حوالين شكل الدائرة بمرونة.</td></tr>
+        <tr><td><code>shape-margin</code></td><td>بتعمل مسافة بين الكلام والشكل اللي بيلف حواليه.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 45: استهداف العناصر (Has Selector) -->
+<div class="lesson-card">
+    <h2>45. المختار الذكي (The :has() Selector)</h2>
+    <p>أقوى خاصية نزلت في CSS مؤخراً، بتخليك تنسق "الأب" لو جواه "إبن" معين:</p>
+    <table class="props-table">
+        <tr><td><code>div:has(img)</code></td><td>لو الـ div جواه صورة، اديله تنسيق خاص.</td></tr>
+        <tr><td><code>form:has(:invalid)</code></td><td>لو الفورم فيها غلط، لون بروازها أحمر.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 46: ملء الفراغات (Place-content) -->
+<div class="lesson-card">
+    <h2>46. التوسيط المطلق (Place-content)</h2>
+    <p>اختصار عبقري بيجمع بين <code>align-content</code> و <code>justify-content</code>:</p>
+    <table class="props-table">
+        <tr><td><code>place-content: center;</code></td><td>بيوسطن كل حاجة جوه الـ Grid أو الـ Flex في سطر واحد.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 47: تلوين التحديد (Selection) -->
+<div class="lesson-card">
+    <h2>47. لون التظليل (::selection)</h2>
+    <p>عشان لما المستخدم يحدد نص بالماوس، اللون ما يبقاش أزرق تقليدي:</p>
+    <table class="props-table">
+        <tr><td><code>::selection { background: var(--neon); color: black; }</code></td><td>بتغير لون خلفية النص المتحدد.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 48: الحروف الكبيرة (Initial Letter) -->
+<div class="lesson-card">
+    <h2>48. حركة المجلات (Initial Letter)</h2>
+    <p>عشان تخلي أول حرف في المقال كبير وواخد مساحة كذا سطر:</p>
+    <table class="props-table">
+        <tr><td><code>initial-letter: 3;</code></td><td>بيخلي أول حرف يمتد بطول 3 سطور.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 49: المسافات البيضاء (White-space) -->
+<div class="lesson-card">
+    <h2>49. التحكم في الفراغات (White-space)</h2>
+    <p>إزاي تتعامل مع المسافات اللي بين الكلمات أو النزول لسطر جديد:</p>
+    <table class="props-table">
+        <tr><td><code>nowrap</code></td><td>بيمنع الكلام إنه ينزل سطر جديد مهما كان طويل.</td></tr>
+        <tr><td><code>pre-line</code></td><td>بيحترم المسافات والسطور اللي إنت كاتبها في الـ HTML.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 50: حدود الصورة (Image Rendering) -->
+<div class="lesson-card">
+    <h2>50. وضوح الـ Pixel Art (Image Rendering)</h2>
+    <p>لو عندك صور صغيرة وعايز تكبرها من غير ما تكسل (Pixelated):</p>
+    <table class="props-table">
+        <tr><td><code>image-rendering: pixelated;</code></td><td>بيحافظ على حواف الصورة حادة جداً (مثالي لألعاب الـ 8-bit).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 51: دمج الصور (Background Blend Mode) -->
+<div class="lesson-card">
+    <h2>51. دمج خلفيات الصور (BG Blend Mode)</h2>
+    <p>لو عندك صورتين خلفية لبعض أو صورة ولون، إزاي يندمجوا:</p>
+    <table class="props-table">
+        <tr><td><code>background-blend-mode: screen;</code></td><td>بيخلي الألوان تتداخل بشكل سينمائي.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 52: كسر الكلمات (Word-break) -->
+<div class="lesson-card">
+    <h2>52. منع تدمير التصميم (Word-break)</h2>
+    <p>لو في كلمة طويلة جداً (زي لينك) ممكن تخرج بره الصندوق، دي بتكسرها:</p>
+    <table class="props-table">
+        <tr><td><code>break-all</code></td><td>بيكسر الكلمة في أي حرف عشان تفضل جوه الصندوق.</td></tr>
+        <tr><td><code>keep-all</code></td><td>بيمنع الكسر تماماً.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 53: تباعد الحروف (Letter Spacing) -->
+<div class="lesson-card">
+    <h2>53. تباعد الحروف (Letter Spacing)</h2>
+    <p>عشان تدي شياكة للعناوين وتخلي الكلام يتنفس:</p>
+    <table class="props-table">
+        <tr><td><code>letter-spacing: 2px;</code></td><td>بيبعد الحروف عن بعضها (للإنجليزي أكتر).</td></tr>
+        <tr><td><code>word-spacing: 5px;</code></td><td>بيبعد الكلمات عن بعضها.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 54: التمرير السلس (Overscroll Behavior) -->
+<div class="lesson-card">
+    <h2>54. منع "هزة" الصفحة (Overscroll)</h2>
+    <p>لما تعمل سكرول لآخر "بوكس"، الصفحة كلها بتتهز، دي بتمنع الحركة دي:</p>
+    <table class="props-table">
+        <tr><td><code>overscroll-behavior: contain;</code></td><td>بيخلي السكرول يفضل جوه العنصر وما يأثرش على الصفحة كلها.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 55: الترقيم الروماني (List Style Type) -->
+<div class="lesson-card">
+    <h2>55. أنواع القوائم (List Types)</h2>
+    <p>أشكال تانية غير النقط التقليدية:</p>
+    <table class="props-table">
+        <tr><td><code>upper-roman</code></td><td>أرقام رومانية كبيرة (I, II, III).</td></tr>
+        <tr><td><code>arabic-indic</code></td><td>الأرقام العربية (١، ٢، ٣).</td></tr>
+        <tr><td><code>armenian</code></td><td>حروف أرمينية.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 56: شفافية المحتوى (Color Alpha) -->
+<div class="lesson-card">
+    <h2>56. الشفافية الذكية (Hex Alpha)</h2>
+    <p>إزاي تعمل لون شفاف باستخدام كود الـ Hex:</p>
+    <table class="props-table">
+        <tr><td><code>#FF000080</code></td><td>أول 6 أرقام للون، وآخر رقمين للشفافية (80 يعني 50%).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 57: الحجم الأقصى (Max-content) -->
+<div class="lesson-card">
+    <h2>57. العرض المطاطي (Intrinsic Sizing)</h2>
+    <p>تخلي العنصر ياخد مقاسه بالظبط على قد اللي جواه:</p>
+    <table class="props-table">
+        <tr><td><code>width: max-content;</code></td><td>بيفرد العنصر لآخره عشان الكلام ما ينزلش سطر جديد.</td></tr>
+        <tr><td><code>width: min-content;</code></td><td>بيصغر العنصر لأقل عرض ممكن يخليه شايل الكلام.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 58: زوايا الحدود (Border Radius Advanced) -->
+<div class="lesson-card">
+    <h2>58. الأشكال العضوية (8 Values Radius)</h2>
+    <p>إنت ممكن تعمل شكل "بيضة" أو "نقطة مياه" بالبوردير بس:</p>
+    <table class="props-table">
+        <tr><td><code>border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;</code></td><td>بيخلي كل زاوية ليها نصف قطر مختلف بالطول وبالعرض.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 59: إظهار المحتوى (Content Visibility) -->
+<div class="lesson-card">
+    <h2>59. تسريع الموقع (Content Visibility)</h2>
+    <p>خاصية سحرية بتخلي المتصفح ما يحملش الحاجات اللي مش باينة في الشاشة عشان يسرع الموقع:</p>
+    <table class="props-table">
+        <tr><td><code>content-visibility: auto;</code></td><td>بتحسن أداء الـ Rendering جداً في الصفحات الطويلة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 60: خاصية الأب (Pointer-events) -->
+<div class="lesson-card">
+    <h2>60. التحكم في النقر (Pointer Events)</h2>
+    <p>لو عايز تخلي العنصر "شفاف" للماوس، يعني يدوس على اللي وراه:</p>
+    <table class="props-table">
+        <tr><td><code>pointer-events: none;</code></td><td>كأن العنصر خيال، الماوس هيدوس على الحاجة اللي تحته مباشرة.</td></tr>
+    </table>
+</div>
+<!-- كارت 61: تنسيق السكرول بار (Scrollbar Styling) -->
+<div class="lesson-card">
+    <h2>61. شكل السكرول بار (Scrollbar)</h2>
+    <p>بدل الشكل التقليدي للمتصفح، تقدر تلون وتصغر شريط التمرير:</p>
+    <table class="props-table">
+        <tr><th>الخاصية</th><th>الوظيفة</th></tr>
+        <tr><td><code>scrollbar-width: thin;</code></td><td>بيخلي الشريط رفيع وشيك (للمتصفحات الحديثة).</td></tr>
+        <tr><td><code>scrollbar-color: var(--neon) black;</code></td><td>بيلون الشريط والمنطقة اللي وراه بكلمة واحدة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 62: تباعد الأسطر (Line Clamp) -->
+<div class="lesson-card">
+    <h2>62. اختصار النص (Line Clamp)</h2>
+    <p>لو عندك وصف طويل وعايز تظهر منه أول سطرين بس وتحط (...) في الآخر:</p>
+    <table class="props-table">
+        <tr><td><code>display: -webkit-box;</code></td><td>لازم تستخدم دي عشان الخاصية تشتغل.</td></tr>
+        <tr><td><code>-webkit-line-clamp: 2;</code></td><td>بتحدد عدد السطور اللي تظهر قبل ما النص يتقص.</td></tr>
+        <tr><td><code>overflow: hidden;</code></td><td>عشان تقص الكلام الزيادة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 63: الحروف الصغيرة (Font Variant) -->
+<div class="lesson-card">
+    <h2>63. الحروف اللاتينية الصغيرة (Small Caps)</h2>
+    <p>بيخلي الحروف الـ Small شكلها زي الـ Capital بس بحجم صغير (شيك جداً في العناوين):</p>
+    <table class="props-table">
+        <tr><td><code>font-variant: small-caps;</code></td><td>بيحول النص لشكل المخطوطات القديمة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 64: الفجوات الذكية (Gap everywhere) -->
+<div class="lesson-card">
+    <h2>64. مسافات الـ Gap الشاملة</h2>
+    <p>الـ <code>gap</code> مابقاش للـ Grid بس، بقى بيشتغل في الـ Flexbox وفي الـ Multi-column كمان:</p>
+    <table class="props-table">
+        <tr><td><code>row-gap</code></td><td>بيعمل مسافة بين الصفوف بس.</td></tr>
+        <tr><td><code>column-gap</code></td><td>بيعمل مسافة بين الأعمدة بس.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 65: دقة الصور (Image Orientation) -->
+<div class="lesson-card">
+    <h2>65. تعديل اتجاه الصورة (Orientation)</h2>
+    <p>لو الصورة مرفوعة بالمقلوب، الـ CSS يقدر يعدلها تلقائياً بناءً على بيانات الكاميرا:</p>
+    <table class="props-table">
+        <tr><td><code>image-orientation: from-image;</code></td><td>بيعدل الصورة لوحدها (خاصية منقذة للمشاريع الكبيرة).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 66: العزل المغناطيسي (Backface Visibility) -->
+<div class="lesson-card">
+    <h2>66. ظهر العنصر (Backface Visibility)</h2>
+    <p>لما تعمل 3D Flip للعنصر، هل عايز تشوف ظهره ولا يختفي؟</p>
+    <table class="props-table">
+        <tr><td><code>hidden</code></td><td>بيخفي العنصر أول ما يلف (مهم جداً في كروت الـ Flashcards).</td></tr>
+    </table>
+</div>
+
+<!-- كارت 67: تحسين الخط (Font Kerning) -->
+<div class="lesson-card">
+    <h2>67. تنسيق فراغات الحروف (Kerning)</h2>
+    <p>بيتحكم في المسافة الدقيقة بين كل حرفين حسب شكلهم (زي المصممين المحترفين):</p>
+    <table class="props-table">
+        <tr><td><code>font-kerning: normal;</code></td><td>بيستخدم بيانات الخط الأصلية لتوزيع الحروف بدقة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 68: تكرار الخلفية (Background Repeat) -->
+<div class="lesson-card">
+    <h2>68. تكرار الخلفية الذكي</h2>
+    <p>طرق تانية غير <code>repeat</code> و <code>no-repeat</code>:</p>
+    <table class="props-table">
+        <tr><td><code>space</code></td><td>بيكرر الصورة وبيسيب مسافات بينهم عشان يملى المكان من غير ما يقصها.</td></tr>
+        <tr><td><code>round</code></td><td>بيمط الصورة شوية عشان يكررها عدد مرات صحيح من غير ما تتقص.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 69: لون الروابط المزارة (Visited) -->
+<div class="lesson-card">
+    <h2>69. الروابط المفتوحة (:visited)</h2>
+    <p>عشان تعرف المستخدم إنه داس على اللينك ده قبل كده:</p>
+    <table class="props-table">
+        <tr><td><code>a:visited { color: #888; }</code></td><td>بتغير لون اللينك بعد ما يتفتح مرة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 70: خاصية الأولوية (Priority) -->
+<div class="lesson-card">
+    <h2>70. القوة القصوى (!important)</h2>
+    <p>لو عندك كود CSS مش عايز يتنفذ بسبب كود تاني، دي بتجبر المتصفح ينفذه:</p>
+    <table class="props-table">
+        <tr><td><code>color: red !important;</code></td><td>بتخلي الخاصية دي "أقوى" من أي كود تاني لنفس العنصر.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 71: تحديد الكتابة (User Select) -->
+<div class="lesson-card">
+    <h2>71. منع النسخ (User Select)</h2>
+    <p>لو عايز تمنع المستخدم إنه يحدد النص أو ينسخه من موقعك:</p>
+    <table class="props-table">
+        <tr><td><code>user-select: none;</code></td><td>بتخلي النص "غير قابل للتحديد".</td></tr>
+    </table>
+</div>
+
+<!-- كارت 72: الانحناء المتجاوب (Container Queries) -->
+<div class="lesson-card">
+    <h2>72. ثورة الـ Container Queries</h2>
+    <p>أحدث خاصية في CSS، بتخلي العنصر يغير شكله حسب حجم "أبوه" مش حسب حجم الشاشة:</p>
+    <table class="props-table">
+        <tr><td><code>@container (min-width: 400px)</code></td><td>كود ثوري بيخلي العناصر ذكية جداً في أي مكان تتحط فيه.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 73: الظل المنسدل (Drop Shadow) -->
+<div class="lesson-card">
+    <h2>73. ظل الأشكال المعقدة (Drop Shadow)</h2>
+    <p>بيفرق عن <code>box-shadow</code> إنه بيعمل ظل حوالين الشكل الحقيقي (حتى لو مثلث أو PNG شفاف):</p>
+    <table class="props-table">
+        <tr><td><code>filter: drop-shadow(5px 5px 10px black);</code></td><td>بيعمل ظل احترافي جداً للصور واللوجوهات.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 74: نمط العرض (Display Contents) -->
+<div class="lesson-card">
+    <h2>74. العنصر "الشبح" (Display Contents)</h2>
+    <p>بيخلي العنصر كأنه مش موجود بس "ولاده" بيفضلوا موجودين وبيأثروا في الـ Layout:</p>
+    <table class="props-table">
+        <tr><td><code>display: contents;</code></td><td>مفيد جداً لما تحب تشيل تأثير الـ Div الأب في الـ Flexbox.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 75: لون البرواز المتغير (CurrentColor) -->
+<div class="lesson-card">
+    <h2>75. اللون السحري (CurrentColor)</h2>
+    <p>كلمة سحرية بتخلي اللون يتبع لون النص تلقائياً:</p>
+    <table class="props-table">
+        <tr><td><code>border: 2px solid currentColor;</code></td><td>لو غيرت لون النص، لون البرواز هيتغير معاه لوحده.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 76: مساحة السكرول (Scroll Margin) -->
+<div class="lesson-card">
+    <h2>76. مساحة السكرول (Scroll Margin)</h2>
+    <p>لما تدوس على لينك داخلي، العنوان ما يلزقش في سقف الشاشة:</p>
+    <table class="props-table">
+        <tr><td><code>scroll-margin-top: 100px;</code></td><td>بيسيب مسافة فوق العنوان لما تروحله عن طريق لينك.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 77: شكل الخط عند التحميل (Font Display) -->
+<div class="lesson-card">
+    <h2>77. سرعة ظهور الخط (Font Display)</h2>
+    <p>عشان الكلام ما يختفيش والموقع بيحمل الخطوط الخاصة:</p>
+    <table class="props-table">
+        <tr><td><code>font-display: swap;</code></td><td>بيظهر خط النظام العادي لحد ما الخط بتاعك يحمل، عشان اليوزر ما يستناش.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 78: التحكم في الـ Resize (TextArea) -->
+<div class="lesson-card">
+    <h2>78. التحكم في التكبير (Resize)</h2>
+    <p>عشان تمنع المستخدم إنه يكبر أو يصغر خانة الكتابة (Textarea) ويبوظ التصميم:</p>
+    <table class="props-table">
+        <tr><td><code>resize: none;</code></td><td>بيشيل علامة التكبير من الركن.</td></tr>
+        <tr><td><code>resize: vertical;</code></td><td>بيسمح بالتكبير بالطول بس.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 79: تباعد الكلمات (Word Spacing) -->
+<div class="lesson-card">
+    <h2>79. تنفس الكلمات (Word Spacing)</h2>
+    <p>بيتحكم في الفراغ بين الكلمات وبعضها:</p>
+    <table class="props-table">
+        <tr><td><code>word-spacing: 10px;</code></td><td>بيوسع المسافات في العناوين الكبيرة.</td></tr>
+    </table>
+</div>
+
+<!-- كارت 80: خاصية الـ Will Change (Performance) -->
+<div class="lesson-card">
+    <h2>80. تنبيه المتصفح (Will Change)</h2>
+    <p>بتقول للمتصفح إن العنصر ده هيتحرك أو يتغير، فبيجهزه عشان الأنيميشن يكون ناعم:</p>
+    <table class="props-table">
+        <tr><td><code>will-change: transform;</code></td><td>بتخلي الـ Animation أسرع بكتير وما يقطعش.</td></tr>
+    </table>
+</div>
+
+    <div class="lesson-card">
+        <h2> جرب المحرر المزدوج (HTML + CSS) 🧪</h2>
+        <p>عدل في الـ CSS وشوف إزاي الـ HTML بيتغير فوراً.</p>
+        <div class="editor-grid">
+            <div class="input-group">
+                <div class="code-header"><span>HTML</span><i class="fab fa-html5"></i></div>
+                <textarea id="html-in" oninput="update()">
+<div class="card">
+  <h1>PhineX Academy</h1>
+  <p>تعلم البرمجة بالحب والاحترافية.</p>
+  <button>ابدأ الآن</button>
+</div></textarea>
+            </div>
+            <div class="input-group">
+                <div class="code-header"><span>CSS</span><i class="fab fa-css3-alt"></i></div>
+                <textarea id="css-in" oninput="update()">
+body { 
+  background: #eee; 
+  display: flex; 
+  justify-content: center; 
+  padding: 20px; 
+}
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: sans-serif;
+}
+h1 { color: #39ff14; background: black; padding: 10px; }
+button {
+  background: #39ff14;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}</textarea>
+            </div>
+            <iframe id="preview-frame"></iframe>
+        </div>
+    </div>
+
+    <div class="quiz-container">
+        <h2>كويز الـ CSS (لازم 5/5 عشان تخلص) 🏁</h2>
+        
+        <div class="q-wrap" id="qb1">
+            <p>1. أنهي خاصية بنستخدمها عشان نبعد العناصر عن بعضها من "بره"؟</p>
+            <div class="opt">
+                <label><input type="radio" name="q1" value="padding"> padding</label>
+                <label><input type="radio" name="q1" value="margin"> margin</label>
+                <label><input type="radio" name="q1" value="border"> border</label>
+            </div>
+        </div>
+
+        <div class="q-wrap" id="qb2">
+            <p>2. إيه الطريقة الصح عشان نربط ملف CSS خارجي؟</p>
+            <div class="opt">
+                <label><input type="radio" name="q2" value="style"> تاج &lt;style&gt;</label>
+                <label><input type="radio" name="q2" value="link"> تاج &lt;link&gt; بداخل الـ head</label>
+                <label><input type="radio" name="q2" value="script"> تاج &lt;script&gt;</label>
+            </div>
+        </div>
+
+        <div class="q-wrap" id="qb3">
+            <p>3. لو عايز تخلي العنصر "شفاف" بنسبة 50%، تستخدم:</p>
+            <div class="opt">
+                <label><input type="radio" name="q3" value="v"> visibility: hidden</label>
+                <label><input type="radio" name="q3" value="o"> opacity: 0.5</label>
+                <label><input type="radio" name="q3" value="c"> color: transparent</label>
+            </div>
+        </div>
+
+        <div class="q-wrap" id="qb4">
+            <p>4. خاصية <code>display: flex</code> بتستخدم أساساً لـ:</p>
+            <div class="opt">
+                <label><input type="radio" name="q4" value="color"> تغيير الألوان.</label>
+                <label><input type="radio" name="q4" value="layout"> توزيع وتنظيم العناصر في الصفحة.</label>
+                <label><input type="radio" name="q4" value="font"> تغيير حجم الخط.</label>
+            </div>
+        </div>
+
+        <div class="q-wrap" id="qb5">
+            <p>5. الـ <code>padding</code> بيعمل مساحة فاضية فين بالظبط؟</p>
+            <div class="opt">
+                <label><input type="radio" name="q5" value="in"> جوه العنصر (بين المحتوى والحواف).</label>
+                <label><input type="radio" name="q5" value="out"> بره العنصر خالص.</label>
+                <label><input type="radio" name="q5" value="no"> مش بيعمل مساحة، ده بيغير اللون.</label>
+            </div>
+        </div>
+
+        <button class="btn-check" onclick="checkQuiz()">تحقق من الإجابات</button>
+
+        <div id="success-box">
+            <h2>أسطورة الـ CSS! قفلت الامتحان 🏆</h2>
+            <p>دلوقتي موقعك بقى له شكل وشخصية. كمل المسيرة!</p>
+            <a href="menu.html" class="finish-link" onclick="saveProgress()">الرجوع للقايمة</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function update() {
+        const html = document.getElementById('html-in').value;
+        const css = "<style>" + document.getElementById('css-in').value + "</style>";
+        const frame = document.getElementById('preview-frame');
+        frame.srcdoc = css + html;
+    }
+    update();
+
+    function checkQuiz() {
+        const answers = { q1: "margin", q2: "link", q3: "o", q4: "layout", q5: "in" };
+        let score = 0;
+
+        for (let i = 1; i <= 5; i++) {
+            const qDiv = document.getElementById(`qb${i}`);
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            
+            if (selected && selected.value === answers[`q${i}`]) {
+                qDiv.classList.add('correct');
+                qDiv.classList.remove('wrong');
+                score++;
+            } else {
+                qDiv.classList.add('wrong');
+                qDiv.classList.remove('correct');
+            }
+        }
+
+        if (score === 5) {
+            document.getElementById('success-box').style.display = 'block';
+            document.querySelector('.btn-check').style.display = 'none';
+        } else {
+            alert(`جبت ${score} من 5. راجع الأجزاء اللي باللون الأحمر وحاول تاني!`);
+        }
+    }
+
+    function saveProgress() {
+        localStorage.setItem('lesson-css', 'completed');
+    }
+</script>
+
+</body>
+</html>
