@@ -533,6 +533,7 @@ footer{
   .stat-item{min-width:100px;padding:14px 16px;}
   .stat-num{font-size:1.5rem;}
 }
+
 </style>
 </head>
 <body>
@@ -546,11 +547,11 @@ footer{
     </a>
     <ul class="nav-links" style="margin-right:auto;margin-left:0;">
       <li><a href="courses/menu.html">الكورسات</a></li>
-      <li><a href="projects/HTML & CSS/projects.html">المشاريع</a></li>
-      <li><a href="courses/HTML & CSS/getting-started.html">كيف تبدأ</a></li>
+      <li><a href="courses/HTML & CSS/projects.html">المشاريع</a></li>
+      <li><a href="courses/HTML & CSS/menu.html">كيف تبدأ</a></li>
       <li><a href="https://discord.gg/wk4xtQVRzm">المجتمع</a></li>
     </ul>
-    <a href="courses/HTML & CSS/menu.html" class="nav-cta">ابدأ التعلم مجاناً ←</a>
+    <a href="courses/menu.html" class="nav-cta">ابدأ التعلم مجاناً ←</a>
   </div>
 </nav>
 
@@ -567,7 +568,7 @@ footer{
 
     <div class="hero-btns">
       <!-- Animated Join Button -->
-      <button class="button" onclick="window.location.href='courses/HTML & CSS/menu.html'">
+      <button class="button" onclick="window.location.href='courses/menu.html'">
         <div class="bg"></div>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 342 208" height="208" width="342" class="splash">
           <path stroke-linecap="round" stroke-width="3" d="M54.1054 99.7837C54.1054 99.7837 40.0984 90.7874 26.6893 97.6362C13.2802 104.485 1.5 97.6362 1.5 97.6362"></path>
@@ -622,7 +623,7 @@ footer{
       </button>
 
       <!-- Play Button -->
-      <button class="button-with-icon"  onclick="window.location.href='courses/HTML & CSS/getting-started.html'">
+      <button class="button-with-icon"  onclick="window.location.href='courses/menu.html'">
         <svg class="bwi-icon" id="Play" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
           <path fill="#ffffff" d="M12 39c-.549 0-1.095-.15-1.578-.447A3.008 3.008 0 0 1 9 36V12c0-1.041.54-2.007 1.422-2.553a3.014 3.014 0 0 1 2.919-.132l24 12a3.003 3.003 0 0 1 0 5.37l-24 12c-.42.21-.885.315-1.341.315z"></path>
         </svg>
@@ -633,7 +634,7 @@ footer{
     <!-- Stats Bar -->
     <div class="stats-bar reveal">
       <div class="stat-item">
-        <div class="stat-num">3</div>
+        <div class="stat-num">4</div>
         <div class="stat-label">مسار برمجي</div>
       </div>
       <div class="stat-item">
@@ -659,6 +660,7 @@ footer{
       <div class="terminal-line" style="color:#f0f0ff;">→ <span style="color:var(--teal);">✓</span> HTML &amp; CSS  → ready</div>
       <div class="terminal-line" style="color:#f0f0ff;">→ <span style="color:var(--teal);">✓</span> JavaScript  → ready</div>
       <div class="terminal-line" style="color:#f0f0ff;">→ <span style="color:var(--teal);">✓</span> Tailwind CSS  → ready</div>
+      <div class="terminal-line" style="color:#f0f0ff;">→ <span style="color:var(--teal);">✓</span> PHP  → ready</div>
       <div class="terminal-line dim">→ Your journey starts now.</div>
       <div class="terminal-line">$ <span class="cursor"></span></div>
     </div>
@@ -675,7 +677,7 @@ footer{
     </div>
     <div class="courses-grid">
 
-      <div class="course-card reveal">
+      <div class="course-card reveal" onclick="window.location.href='courses/HTML & CSS/menu.html'">
         <div class="course-thumb html-bg">
           <div class="thumb-bg html-bg"></div>
           <span class="lang-icon">⟨/⟩</span>
@@ -696,7 +698,7 @@ footer{
         </div>
       </div>
 
-      <div class="course-card reveal">
+      <div class="course-card reveal" onclick="window.location.href='courses/Js/menu.html'">
         <div class="course-thumb js-bg">
           <div class="thumb-bg js-bg"></div>
           <span class="lang-icon" style="font-family:'JetBrains Mono',monospace;font-size:42px;color:#f7df1e;">JS</span>
@@ -717,7 +719,7 @@ footer{
         </div>
       </div>
       
-      <div class="course-card reveal">
+      <div class="course-card reveal" onclick="window.location.href='courses/Tailwind CSS/menu.html'">
         <div class="course-thumb tailwind-bg">
           <div class="thumb-bg tailwind-bg"></div>
           <span class="lang-icon" style="font-family:'JetBrains Mono',monospace;font-size:42px;color:#008cff;">Tailwind</span>
@@ -738,22 +740,24 @@ footer{
         </div>
       </div>
 
-      <!-- Coming Soon Card -->
-      <div class="course-card reveal" style="opacity:.6;cursor:default;">
-        <div class="course-thumb" style="background:linear-gradient(135deg,rgba(142,38,226,0.1),rgba(142,38,226,0.04));height:190px;display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:48px;filter:grayscale(.5);">🔒</span>
+<div class="course-card reveal" onclick="window.location.href='courses/php-course/index.html'">
+        <div class="course-thumb php-bg">
+          <div class="thumb-bg php-bg"></div>
+          <span class="lang-icon" style="font-family:'JetBrains Mono',monospace;font-size:42px;color:#008cff;">PHP</span>
         </div>
         <div class="course-body">
-          <span class="course-level" style="background:rgba(255,255,255,0.05);color:var(--muted);">قريباً</span>
-          <h3 class="course-title">PHP المتقدم</h3>
-          <p class="course-desc">كورس شامل في PHP من الأساسيات حتى الأنماط المتقدمة وأفضل الممارسات.</p>
+          <span class="course-level level-beginner">مبتدئ</span>
+          <h3 class="course-title">PHP من الصفر</h3>
+          <p class="course-desc">تعلم لغة البرمجة PHP من الأساسيات حتى الأنماط المتقدمة.</p>
           <div class="course-meta">
-            <span><i class="far fa-clock"></i> قريباً</span>
+            <span><i class="far fa-clock"></i> 12 ساعة</span>
+            <span><i class="far fa-file-code"></i> 13 درس</span>
+            <span><i class="fas fa-layer-group"></i> 2 مشاريع</span>
           </div>
         </div>
-        <div class="course-footer" style="background:rgba(255,255,255,0.01);">
-          <span style="font-size:13px;color:var(--muted);">قيد الإعداد…</span>
-          <button class="btn-course" style="opacity:.5;cursor:default;">انتظرنا</button>
+        <div class="course-footer">
+          <span class="free-badge">مجاني ✓</span>
+          <a class="btn-course" href='courses/php-course/index.html'>ابدأ الآن <i class="fas fa-arrow-left"></i></a>
         </div>
       </div>
 
@@ -819,6 +823,18 @@ footer{
         <div class="proj-actions">
           <button class="btn-proj-primary"><i class="fas fa-code"></i> ابدأ المشروع</button>
           <button class="btn-proj-ghost"><i class="fab fa-github"></i> GitHub</button>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="proj-num">01 · Tailwind CSS, JavaScript and HTML</div>
+        <h3 class="proj-title">موقع سيرة ذاتية</h3>
+        <p class="proj-desc"> باستخدام Tailwind CSS و JavaScript و HTML في مشروع عملي صعب</p>
+        <div class="proj-tags">
+          <span class="proj-tag">HTML5</span><span class="proj-tag">Tailwind CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">Animations</span>
+        </div>
+        <div class="proj-actions">
+          <button class="btn-proj-primary"><i class="fas fa-code"></i> ابدأ المشروع</button>
         </div>
       </div>
 
