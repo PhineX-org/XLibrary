@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhineX | دورة PHP الشاملة — من الصفر للاحتراف</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Cairo:wght@400;600;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+:root{--neon:#39ff14;--neon-dim:rgba(57,255,20,.08);--void:#05070a;--surface:#09090f;--card:#0d1017;--border:rgba(255,255,255,.07);--border2:rgba(57,255,20,.18);--text:#e2e8f0;--muted:#64748b;--radius:14px;}
+body{font-family:'Cairo',sans-serif;background:var(--void);color:var(--text);min-height:100vh;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:var(--neon);border-radius:3px;}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(5,5,10,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 48px;gap:16px;}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--neon);letter-spacing:-.5px;text-decoration:none;}
+.nav-spacer{flex:1;}
+.nav-pill{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:var(--neon-dim);border:1px solid var(--border2);color:var(--neon);border-radius:100px;padding:5px 14px;}
+.nav-start{background:var(--neon);color:#050508;padding:8px 22px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;font-family:'Cairo',sans-serif;}
+.nav-start:hover{box-shadow:0 0 20px rgba(57,255,20,.4);transform:translateY(-1px);}
+
+/* HERO */
+.hero{padding:100px 48px 80px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(57,255,20,.08),transparent);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--neon-dim);border:1px solid var(--border2);border-radius:100px;padding:6px 18px;font-size:12px;font-weight:700;color:var(--neon);letter-spacing:.5px;margin-bottom:28px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:20px;}
+.hero h1 span{color:var(--neon);}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:600px;margin:0 auto 40px;line-height:1.75;}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--neon);color:#050508;padding:14px 36px;border-radius:12px;font-size:15px;font-weight:800;text-decoration:none;transition:all .2s;font-family:'Cairo',sans-serif;box-shadow:0 0 20px rgba(57,255,20,.2);}
+.btn-primary:hover{box-shadow:0 0 36px rgba(57,255,20,.5);transform:translateY(-2px);}
+.btn-secondary{background:transparent;border:1px solid var(--border);color:var(--text);padding:14px 32px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;font-family:'Cairo',sans-serif;}
+.btn-secondary:hover{border-color:var(--neon);color:var(--neon);}
+
+/* STATS */
+.stats-bar{display:flex;justify-content:center;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,255,255,.02);flex-wrap:wrap;}
+.stat-item{padding:28px 48px;text-align:center;border-left:1px solid var(--border);}
+.stat-item:last-child{border-left:none;}
+.stat-num{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--neon);display:block;line-height:1;}
+.stat-label{font-size:13px;color:var(--muted);margin-top:6px;display:block;}
+
+/* WHAT YOU LEARN */
+.section{padding:80px 48px;max-width:1100px;margin:0 auto;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--neon);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-1px;margin-bottom:12px;}
+.section-sub{font-size:1rem;color:var(--muted);margin-bottom:48px;line-height:1.7;}
+.learn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.learn-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;transition:all .25s;}
+.learn-card:hover{border-color:rgba(57,255,20,.25);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3);}
+.lc-icon{font-size:1.6rem;margin-bottom:10px;}
+.lc-title{font-weight:700;font-size:.95rem;margin-bottom:6px;}
+.lc-desc{font-size:.82rem;color:var(--muted);line-height:1.65;}
+
+/* CURRICULUM */
+.curriculum{padding:80px 48px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.curriculum-inner{max-width:1100px;margin:0 auto;}
+.lessons-list{display:flex;flex-direction:column;gap:8px;margin-top:40px;}
+.lesson-item{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 22px;text-decoration:none;color:var(--text);transition:all .2s;}
+.lesson-item:hover{border-color:rgba(57,255,20,.25);background:rgba(57,255,20,.03);transform:translateX(-3px);}
+.li-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--neon);background:var(--neon-dim);border:1px solid var(--border2);border-radius:8px;padding:3px 9px;flex-shrink:0;}
+.li-icon{font-size:1.2rem;flex-shrink:0;}
+.li-info{flex:1;}
+.li-title{font-weight:700;font-size:.92rem;margin-bottom:2px;}
+.li-desc{font-size:.78rem;color:var(--muted);}
+.li-meta{display:flex;gap:8px;flex-shrink:0;}
+.li-tag{font-size:.7rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:2px 8px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.li-done{font-size:.7rem;color:var(--neon);background:var(--neon-dim);border:1px solid var(--border2);border-radius:6px;padding:2px 8px;display:none;font-family:'JetBrains Mono',monospace;}
+
+/* TECH STACK */
+.tech-section{padding:80px 48px;max-width:1100px;margin:0 auto;text-align:center;}
+.tech-grid{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:40px;}
+.tech-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;width:140px;text-align:center;transition:all .25s;}
+.tech-card:hover{border-color:rgba(57,255,20,.25);transform:translateY(-4px);}
+.tech-icon{font-size:2.5rem;margin-bottom:10px;}
+.tech-name{font-size:.82rem;font-weight:700;color:var(--text);}
+.tech-desc{font-size:.72rem;color:var(--muted);margin-top:4px;}
+
+/* PROGRESS */
+.progress-section{padding:60px 48px;border-top:1px solid var(--border);}
+.progress-inner{max-width:700px;margin:0 auto;text-align:center;}
+.progress-bar-wrap{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:100px;height:10px;margin:20px 0 10px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--neon),#00ff88);border-radius:100px;transition:width .8s ease;width:0%;}
+.progress-text{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--neon);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:40px 48px;text-align:center;color:var(--muted);font-size:13px;}
+footer strong{color:var(--neon);font-family:'Syne',sans-serif;}
+
+@media(max-width:768px){
+  .nav{padding:0 20px;}.hero{padding:60px 20px 50px;}.section,.curriculum,.tech-section,.progress-section{padding:60px 20px;}
+  .stat-item{padding:20px 24px;}.hero h1{letter-spacing:-1px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">PhineX</a>
+  <div class="nav-spacer"></div>
+  <span class="nav-pill" id="navPill">0/17 مكتملة</span>
+  <a href="lesson-00-setup.html" class="nav-start">ابدأ الدورة ←</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🐘 دورة PHP الشاملة · 2026</div>
+  <h1>تعلّم <span>PHP</span> من الصفر<br>حتى الاحتراف</h1>
+  <p>دورة متكاملة تغطي كل ما تحتاجه: من إعداد XAMPP وكتابة أول سطر PHP، حتى قواعد البيانات MySQL المتقدمة والأمان الكامل.</p>
+  <div class="hero-cta">
+    <a href="lesson-00-setup.html" class="btn-primary">🚀 ابدأ مجاناً</a>
+    <a href="#curriculum" class="btn-secondary">📚 تصفح المحتوى</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num">17</span><span class="stat-label">درساً متكاملاً</span></div>
+  <div class="stat-item"><span class="stat-num">150+</span><span class="stat-label">مثال بالكود</span></div>
+  <div class="stat-item"><span class="stat-num">100+</span><span class="stat-label">سؤال تفاعلي</span></div>
+  <div class="stat-item"><span class="stat-num">0$</span><span class="stat-label">مجاناً تماماً</span></div>
+</div>
+
+<!-- WHAT YOU LEARN -->
+<section class="section">
+  <div class="section-label">محتوى الدورة</div>
+  <h2 class="section-title">ماذا ستتعلم؟</h2>
+  <p class="section-sub">كل ما يحتاجه مطوّر PHP محترف في مكان واحد</p>
+  <div class="learn-grid">
+    <div class="learn-card"><div class="lc-icon">🔧</div><div class="lc-title">إعداد بيئة العمل</div><div class="lc-desc">XAMPP + VS Code + PHP Intelephense + Xdebug من الصفر</div></div>
+    <div class="learn-card"><div class="lc-icon">📦</div><div class="lc-title">أساسيات PHP</div><div class="lc-desc">متغيرات، أنواع البيانات، عمليات، شروط، حلقات، دوال</div></div>
+    <div class="learn-card"><div class="lc-icon">📚</div><div class="lc-title">مصفوفات وسلاسل نصية</div><div class="lc-desc">كل الدوال المدمجة مع أمثلة عملية شاملة</div></div>
+    <div class="learn-card"><div class="lc-icon">🏗️</div><div class="lc-title">OOP كاملة</div><div class="lc-desc">Classes, Inheritance, Interfaces, Abstract, Traits</div></div>
+    <div class="learn-card"><div class="lc-icon">🌐</div><div class="lc-title">Superglobals</div><div class="lc-desc">$_GET, $_POST, $_SESSION, $_COOKIE, $_FILES, $_SERVER</div></div>
+    <div class="learn-card"><div class="lc-icon">📝</div><div class="lc-title">النماذج والتحقق</div><div class="lc-desc">Form validation كاملة، تنظيف المدخلات، رفع الملفات</div></div>
+    <div class="learn-card"><div class="lc-icon">🗄️</div><div class="lc-title">MySQL + PDO</div><div class="lc-desc">إنشاء DB، الاتصال بـ PDO، Prepared Statements</div></div>
+    <div class="learn-card"><div class="lc-icon">💾</div><div class="lc-title">CRUD كامل</div><div class="lc-desc">Insert, Select, Update, Delete مع Pagination وTransactions</div></div>
+    <div class="learn-card"><div class="lc-icon">⚡</div><div class="lc-title">تحسين قاعدة البيانات</div><div class="lc-desc">Indexes, Normalization, Query Optimization, Migrations</div></div>
+    <div class="learn-card"><div class="lc-icon">🔒</div><div class="lc-title">الأمان الكامل</div><div class="lc-desc">SQL Injection, XSS, CSRF, Password hashing</div></div>
+    <div class="learn-card"><div class="lc-icon">🌤️</div><div class="lc-title">مشروع حقيقي</div><div class="lc-desc">تطبيق طقس كامل يجمع كل المهارات معاً</div></div>
+    <div class="learn-card"><div class="lc-icon">🏆</div><div class="lc-title">اختبار نهائي + شهادة</div><div class="lc-desc">20 سؤالاً شاملاً مع شهادة إتمام رقمية</div></div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum" id="curriculum">
+  <div class="curriculum-inner">
+    <div class="section-label">المنهج الدراسي</div>
+    <h2 class="section-title">جميع الدروس</h2>
+    <p class="section-sub">17 درساً مرتّبة من الأسهل للأصعب — كل درس يبني على السابق</p>
+    <div class="lessons-list" id="lessonsList">
+      <a href="lesson-00-setup.html" class="lesson-item" data-lid="setup"><span class="li-num">00</span><span class="li-icon">🔧</span><div class="li-info"><div class="li-title">إعداد بيئة العمل</div><div class="li-desc">XAMPP + VS Code + PHP Extensions + أول ملف PHP</div></div><div class="li-meta"><span class="li-tag">45 دق</span><span class="li-done" id="d-setup">✓ مكتمل</span></div></a>
+      <a href="lesson-01-intro.html" class="lesson-item" data-lid="intro"><span class="li-num">01</span><span class="li-icon">🐘</span><div class="li-info"><div class="li-title">مقدمة إلى PHP</div><div class="li-desc">ما هي PHP، كيف تعمل، أول برنامج، syntax أساسي</div></div><div class="li-meta"><span class="li-tag">30 دق</span><span class="li-done" id="d-intro">✓ مكتمل</span></div></a>
+      <a href="lesson-02-variables.html" class="lesson-item" data-lid="variables"><span class="li-num">02</span><span class="li-icon">📦</span><div class="li-info"><div class="li-title">المتغيرات وأنواع البيانات</div><div class="li-desc">int, float, string, bool, null, array — Type casting وـ juggling</div></div><div class="li-meta"><span class="li-tag">35 دق</span><span class="li-done" id="d-variables">✓ مكتمل</span></div></a>
+      <a href="lesson-03-operators.html" class="lesson-item" data-lid="operators"><span class="li-num">03</span><span class="li-icon">➗</span><div class="li-info"><div class="li-title">العمليات والمشغلات</div><div class="li-desc">حسابية، مقارنة، منطقية، سلاسل، تعيين، Null Coalescing</div></div><div class="li-meta"><span class="li-tag">25 دق</span><span class="li-done" id="d-operators">✓ مكتمل</span></div></a>
+      <a href="lesson-04-conditionals.html" class="lesson-item" data-lid="conditionals"><span class="li-num">04</span><span class="li-icon">🔀</span><div class="li-info"><div class="li-title">الجمل الشرطية</div><div class="li-desc">if/elseif/else, switch/case, match, Ternary, Null Coalescing</div></div><div class="li-meta"><span class="li-tag">30 دق</span><span class="li-done" id="d-conditionals">✓ مكتمل</span></div></a>
+      <a href="lesson-05-loops.html" class="lesson-item" data-lid="loops"><span class="li-num">05</span><span class="li-icon">🔁</span><div class="li-info"><div class="li-title">الحلقات التكرارية</div><div class="li-desc">for, foreach, while, do-while — break وـ continue</div></div><div class="li-meta"><span class="li-tag">35 دق</span><span class="li-done" id="d-loops">✓ مكتمل</span></div></a>
+      <a href="lesson-06-functions.html" class="lesson-item" data-lid="functions"><span class="li-num">06</span><span class="li-icon">⚙️</span><div class="li-info"><div class="li-title">الدوال (Functions)</div><div class="li-desc">تصريح الأنواع، Default values، Closures، Arrow Functions، Recursion</div></div><div class="li-meta"><span class="li-tag">40 دق</span><span class="li-done" id="d-functions">✓ مكتمل</span></div></a>
+      <a href="lesson-07-arrays.html" class="lesson-item" data-lid="arrays"><span class="li-num">07</span><span class="li-icon">📚</span><div class="li-info"><div class="li-title">المصفوفات (Arrays)</div><div class="li-desc">Indexed, Associative, Multidimensional — كل الدوال المدمجة</div></div><div class="li-meta"><span class="li-tag">45 دق</span><span class="li-done" id="d-arrays">✓ مكتمل</span></div></a>
+      <a href="lesson-08-strings.html" class="lesson-item" data-lid="strings"><span class="li-num">08</span><span class="li-icon">✍️</span><div class="li-info"><div class="li-title">السلاسل النصية (Strings)</div><div class="li-desc">Heredoc, Nowdoc, كل دوال الـ strings، Regex</div></div><div class="li-meta"><span class="li-tag">40 دق</span><span class="li-done" id="d-strings">✓ مكتمل</span></div></a>
+      <a href="lesson-09-oop.html" class="lesson-item" data-lid="oop"><span class="li-num">09</span><span class="li-icon">🏗️</span><div class="li-info"><div class="li-title">البرمجة كائنية التوجه (OOP)</div><div class="li-desc">Classes, Properties, Methods, Inheritance, Interfaces, Traits, Abstract</div></div><div class="li-meta"><span class="li-tag">60 دق</span><span class="li-done" id="d-oop">✓ مكتمل</span></div></a>
+      <a href="lesson-10-forms.html" class="lesson-item" data-lid="forms"><span class="li-num">10</span><span class="li-icon">📝</span><div class="li-info"><div class="li-title">النماذج ومدخلات المستخدم</div><div class="li-desc">Form validation, sanitization, file upload, رفع الملفات بأمان</div></div><div class="li-meta"><span class="li-tag">45 دق</span><span class="li-done" id="d-forms">✓ مكتمل</span></div></a>
+      <a href="lesson-11-superglobals.html" class="lesson-item" data-lid="superglobals"><span class="li-num">11</span><span class="li-icon">🌐</span><div class="li-info"><div class="li-title">المتغيرات العامة Superglobals</div><div class="li-desc">$_GET, $_POST, $_SESSION, $_COOKIE, $_SERVER, $_FILES, $GLOBALS</div></div><div class="li-meta"><span class="li-tag">50 دق</span><span class="li-done" id="d-superglobals">✓ مكتمل</span></div></a>
+      <a href="lesson-12-weather.html" class="lesson-item" data-lid="weather"><span class="li-num">12</span><span class="li-icon">🌤️</span><div class="li-info"><div class="li-title">مشروع: تطبيق الطقس</div><div class="li-desc">API integration كاملة — الجمع بين كل ما تعلمناه</div></div><div class="li-meta"><span class="li-tag">مشروع</span><span class="li-done" id="d-weather">✓ مكتمل</span></div></a>
+      <a href="lesson-13-database-intro.html" class="lesson-item" data-lid="db-intro"><span class="li-num">13</span><span class="li-icon">🗄️</span><div class="li-info"><div class="li-title">قاعدة البيانات — المقدمة</div><div class="li-desc">MySQL, phpMyAdmin, PDO connection, أنواع البيانات، SQL أساسي</div></div><div class="li-meta"><span class="li-tag">55 دق</span><span class="li-done" id="d-db-intro">✓ مكتمل</span></div></a>
+      <a href="lesson-14-database-crud.html" class="lesson-item" data-lid="db-crud"><span class="li-num">14</span><span class="li-icon">💾</span><div class="li-info"><div class="li-title">قاعدة البيانات — CRUD كامل</div><div class="li-desc">Create, Read, Update, Delete مع Pagination, Transactions, CSRF</div></div><div class="li-meta"><span class="li-tag">65 دق</span><span class="li-done" id="d-db-crud">✓ مكتمل</span></div></a>
+      <a href="lesson-15-database-advanced.html" class="lesson-item" data-lid="db-advanced"><span class="li-num">15</span><span class="li-icon">⚡</span><div class="li-info"><div class="li-title">قاعدة البيانات — تحسين وأمان</div><div class="li-desc">Indexes, SQL Injection, Normalization, Migrations, Backup</div></div><div class="li-meta"><span class="li-tag">70 دق</span><span class="li-done" id="d-db-advanced">✓ مكتمل</span></div></a>
+      <a href="lesson-16-final.html" class="lesson-item" data-lid="final" style="border-color:rgba(251,191,36,.2);background:rgba(251,191,36,.02);"><span class="li-num" style="color:#fbbf24;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3)">16</span><span class="li-icon">🏆</span><div class="li-info"><div class="li-title">مراجعة شاملة + اختبار نهائي</div><div class="li-desc">مراجعة الدورة كاملة + 20 سؤالاً + شهادة إتمام</div></div><div class="li-meta"><span class="li-tag" style="color:#fbbf24;border-color:rgba(251,191,36,.3)">30 دق</span><span class="li-done" id="d-final">✓ مكتمل</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="tech-section">
+  <div class="section-label">أدوات الدورة</div>
+  <h2 class="section-title">التقنيات التي ستتعلمها</h2>
+  <div class="tech-grid">
+    <div class="tech-card"><div class="tech-icon">🐘</div><div class="tech-name">PHP 8.2</div><div class="tech-desc">لغة الـ backend</div></div>
+    <div class="tech-card"><div class="tech-icon">🗄️</div><div class="tech-name">MySQL</div><div class="tech-desc">قاعدة البيانات</div></div>
+    <div class="tech-card"><div class="tech-icon">🔌</div><div class="tech-name">PDO</div><div class="tech-desc">اتصال آمن بـ DB</div></div>
+    <div class="tech-card"><div class="tech-icon">🖥️</div><div class="tech-name">XAMPP</div><div class="tech-desc">سيرفر محلي</div></div>
+    <div class="tech-card"><div class="tech-icon">💻</div><div class="tech-name">VS Code</div><div class="tech-desc">محرر الكود</div></div>
+    <div class="tech-card"><div class="tech-icon">🔍</div><div class="tech-name">phpMyAdmin</div><div class="tech-desc">إدارة DB</div></div>
+  </div>
+</section>
+
+<!-- PROGRESS -->
+<section class="progress-section">
+  <div class="progress-inner">
+    <div class="section-label" style="text-align:center">تقدّمك الحالي</div>
+    <h2 class="section-title" style="text-align:center">أين أنت في الدورة؟</h2>
+    <div class="progress-bar-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="progress-text" id="progressText">0 من 17 درساً مكتملاً</p>
+    <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;" id="progressActions">
+      <a href="lesson-00-setup.html" class="btn-primary" id="continueBtn">▶ ابدأ الآن</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  بُنيت بـ ❤️ بواسطة <strong>PhineX Academy</strong> · دورة PHP الشاملة · 2026<br>
+  <span style="font-size:12px;opacity:.5;margin-top:6px;display:block">جميع الدروس مجانية — احفظ تقدّمك محلياً في المتصفح</span>
+</footer>
+
+<script>
+const LESSONS = [
+  'setup','intro','variables','operators','conditionals','loops',
+  'functions','arrays','strings','oop','forms','superglobals',
+  'weather','db-intro','db-crud','db-advanced','final'
+];
+
+function isCompleted(id){return localStorage.getItem('lesson-'+id)==='completed';}
+
+function updateUI(){
+  let done = 0;
+  LESSONS.forEach(lid=>{
+    if(isCompleted(lid)){
+      done++;
+      const el=document.getElementById('d-'+lid);
+      if(el) el.style.display='block';
+      const item=document.querySelector('.lesson-item[data-lid="'+lid+'"]');
+      if(item){item.style.borderColor='rgba(57,255,20,.3)';item.style.background='rgba(57,255,20,.02)';}
+    }
+  });
+
+  const pct = Math.round(done / LESSONS.length * 100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressText').textContent = done + ' من ' + LESSONS.length + ' درساً مكتملاً (' + pct + '%)';
+  document.getElementById('navPill').textContent = done+'/'+LESSONS.length+' مكتملة';
+
+  // Update continue button
+  const cb = document.getElementById('continueBtn');
+  if(done === LESSONS.length){
+    cb.textContent='🏆 راجع الشهادة';
+    cb.href='lesson-16-final.html';
+  } else if(done > 0){
+    // Find next uncompleted
+    const next = LESSONS.find(lid=>!isCompleted(lid));
+    if(next){
+      const nextEl = document.querySelector('.lesson-item[data-lid="'+next+'"]');
+      const nextTitle = nextEl?.querySelector('.li-title')?.textContent || 'التالي';
+      cb.textContent = '▶ متابعة: ' + nextTitle;
+      cb.href = nextEl?.href || 'lesson-00-setup.html';
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', updateUI);
+</script>
+</body>
+</html>
